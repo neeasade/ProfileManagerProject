@@ -1,9 +1,7 @@
 # FPT2S15
 
-##Profile Manager branch
+##ProtocolManager branch
 
-This is the profile manager branch of the repo.
-There will be 2 projects here, one for the test view and a lib to be used in the main repo.
+This is the protocol manager branch of the repo.
 
-A folder containing the design will also reside here.
 
