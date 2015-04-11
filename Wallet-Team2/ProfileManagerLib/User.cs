@@ -15,7 +15,7 @@ namespace ProfileManagerLib
     }
 
 
-    class User
+    public class User
     {
         String mName;
         String mUserName;
@@ -25,6 +25,24 @@ namespace ProfileManagerLib
         String mRecoveryQuestion;
         String mRecoveryAnswer;
         String mPhoneNumber;
+
+        /// <summary>
+        /// Add an existing address object to the list of addresses.
+        /// If there are 5 existing addresses for this user, the last on the list will be removed.
+        /// </summary>
+        /// <param name="aAddressToAdd"></param>
+        public void AddAddress(Address aAddressToAdd)
+        {
+            if (mAddresses.Count == 5)
+            {
+                mAddresses.RemoveAt(4);
+                mAddresses.Add(aAddressToAdd);
+            }
+            else
+            {
+                mAddresses.Add(aAddressToAdd);
+            }
+        }
 
 
         /// <summary>

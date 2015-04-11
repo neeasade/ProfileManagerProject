@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    class Address
+    public class Address
     {
         private string mStreetNumber;
         private string mZip;

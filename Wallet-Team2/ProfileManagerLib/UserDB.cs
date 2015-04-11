@@ -7,10 +7,24 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    class UserDB
+    public class UserDB
     {
         string mDatabaseLocation;
         List<User> mUsers;
+
+        /// <summary>
+        /// Add a new user to the database
+        /// </summary>
+        /// <param name="aNewUser"></param>
+        public void AddUser(User aNewUser)
+        {
+            mUsers.Add(aNewUser);
+        }
+
+        public UserDB()
+        {
+            mUsers = new List<User>();
+        }
 
         /// <summary>
         /// Load in a new userDB based off of a text file.
