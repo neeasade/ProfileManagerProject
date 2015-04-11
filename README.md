@@ -8,3 +8,7 @@ This is the development branch. While you will not be working with this branch s
 
 #ProtocolManager
 This branch will be used be the Protocol Manager group to create features for our section of the project.
+
+#ProfileManager 
+This branch adds three projects to the Wallet-Team2 solution: ProfileManagerLib, ProfileManagerTestView, ProfileManagerDiagram. Within the ProfileManagerDiagram project there is a folder 'design' containing the test cases and state diagram for the ProfileManager.
+

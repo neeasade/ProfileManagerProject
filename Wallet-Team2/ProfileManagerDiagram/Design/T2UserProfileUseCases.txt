@@ -1,0 +1,47 @@
+
+	
+User Profile manager use cases:
+PASSWORD RECOVERY:
+	When a user forgets their password, they User Profile Manager (UPM) shall provide the ability to request a password recovery.
+	When a password recovery has been requested, the UPM shall provide a form to recover the password.
+		[COM] The form will provide a security question and answer, submitted during the profile creation, via textbox.
+	If the security question is answered incorrectly, the UPM shall return to the top level page.
+	If the security question is answered correctly, the UPM shall return the password to the user.
+USERNAME RECOVERY
+	When a user forgets their username the UPM shall provide the ability to request a their username be displayed.
+	When a username display has been requested and correct email and password have been entered, the UPM shall display the username.
+NEW USER
+	The UPM shall provide the ability to create a new user.
+	Upon a new user registery request, the UPM shall open a New User form.
+		[COM] The new user form will include the following fields:
+		Username
+		Password
+		Confirm Password
+		Shipping Address
+			Street number/Address
+			City
+			State
+			Zip (extended zip possible)
+		Security question
+		Security answer
+DELETE USER
+	The UPM shall provide the ability to delete a user.
+	Upon user deletion requested, the user shall be prompted with a "Confirm" message and a password entry.
+ENTER NEW ADDRESS
+	The UPM shall provide the utility to store up to 5 addresses per user.
+	Upon a new address request, the UPM shall provide a field with the address fields above.
+	If the user already has 5 addresses stored, the UPM shall return an error.
+Preferred shipping address
+	With every new address entry, the user shall be provided the means to set the address to their preferred shipping address.
+	The UPM shall provide the ability to change the preferred shipping address to any currently saved address.
+Shipping Address Deletion
+	The UPM shall provide the utility to delete a previously stored address.
+Wallet Access
+	The UPM shall provide the user access to stored payment methods within the wallet.
+LOGON
+	The UPM shall search the user database (UDB) to enable a user to logon with username and password
+	The UPM shall provide the user the choice to remain logged in for up to 2 hours.
+	The UPM shall provide the user the choice to remember their password.
+Change logon data
+	The UPM shall provide the user the ability to change their username or password.
+

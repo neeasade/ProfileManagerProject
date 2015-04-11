@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wallet-Team2", "Wallet-Team2\Wallet-Team2.csproj", "{F3755F58-AC63-41CE-90E2-FB8D5507A85D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileManagerTestView", "ProfileManagerTestView\ProfileManagerTestView.csproj", "{36CD39DC-6F25-47CE-BAEE-AB37D8E0BECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileManagerLib", "ProfileManagerLib\ProfileManagerLib.csproj", "{B1B45532-43D8-471C-8A9A-05B1A227B20A}"
+EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ProfileManagerDiagram", "ProfileManagerDiagram\ProfileManagerDiagram.modelproj", "{78CF3CDA-B851-4C7F-9720-DFD1A9453738}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{F3755F58-AC63-41CE-90E2-FB8D5507A85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3755F58-AC63-41CE-90E2-FB8D5507A85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3755F58-AC63-41CE-90E2-FB8D5507A85D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36CD39DC-6F25-47CE-BAEE-AB37D8E0BECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36CD39DC-6F25-47CE-BAEE-AB37D8E0BECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36CD39DC-6F25-47CE-BAEE-AB37D8E0BECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36CD39DC-6F25-47CE-BAEE-AB37D8E0BECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B45532-43D8-471C-8A9A-05B1A227B20A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B45532-43D8-471C-8A9A-05B1A227B20A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B45532-43D8-471C-8A9A-05B1A227B20A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B45532-43D8-471C-8A9A-05B1A227B20A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CF3CDA-B851-4C7F-9720-DFD1A9453738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CF3CDA-B851-4C7F-9720-DFD1A9453738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CF3CDA-B851-4C7F-9720-DFD1A9453738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CF3CDA-B851-4C7F-9720-DFD1A9453738}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
