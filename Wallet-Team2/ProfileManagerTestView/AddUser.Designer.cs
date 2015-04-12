@@ -178,9 +178,9 @@
             // 
             // uxSave
             // 
-            this.uxSave.Location = new System.Drawing.Point(125, 214);
+            this.uxSave.Location = new System.Drawing.Point(87, 214);
             this.uxSave.Name = "uxSave";
-            this.uxSave.Size = new System.Drawing.Size(75, 23);
+            this.uxSave.Size = new System.Drawing.Size(113, 23);
             this.uxSave.TabIndex = 16;
             this.uxSave.Text = "Save";
             this.uxSave.UseVisualStyleBackColor = true;
@@ -188,12 +188,13 @@
             // 
             // uxPasswordChange
             // 
-            this.uxPasswordChange.Location = new System.Drawing.Point(125, 244);
+            this.uxPasswordChange.Location = new System.Drawing.Point(87, 244);
             this.uxPasswordChange.Name = "uxPasswordChange";
-            this.uxPasswordChange.Size = new System.Drawing.Size(75, 23);
+            this.uxPasswordChange.Size = new System.Drawing.Size(113, 23);
             this.uxPasswordChange.TabIndex = 17;
             this.uxPasswordChange.Text = "Change Password";
             this.uxPasswordChange.UseVisualStyleBackColor = true;
+            this.uxPasswordChange.Click += new System.EventHandler(this.uxPasswordChange_Click);
             // 
             // AddUser
             // 

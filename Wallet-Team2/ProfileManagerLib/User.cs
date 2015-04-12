@@ -25,6 +25,18 @@ namespace ProfileManagerLib
         public string mRecoveryQuestion;
         public string mRecoveryAnswer;
         public string mPhoneNumber;
+        public bool mLoggedIn;
+
+        /// <summary>
+        /// Attempt to log this user in with a password. mLoggedIn will be set with the result of this.
+        /// </summary>
+        /// <param name="aPassword"></param>
+        /// <returns>True if the logon is successful, false if otherwise</returns>
+        public bool LogIn(string aPassword)
+        {
+            mLoggedIn = (mPassword == aPassword);
+            return mLoggedIn;
+        }
 
         /// <summary>
         /// Add an existing address object to the list of addresses.
@@ -42,6 +54,39 @@ namespace ProfileManagerLib
             {
                 mAddresses.Add(aAddressToAdd);
             }
+        }
+
+        /// <summary>
+        /// Return the address object that represents the preferred shipping address.
+        /// </summary>
+        /// <returns></returns>
+        public Address GetPreferredShippingAddress()
+        {
+            return mAddresses[0];
+        }
+
+        /// <summary>
+        /// Set a preferred shipping address by calling it's ToString() method to pass as a parameter here.
+        /// Returns false if the address was not found in this user.
+        /// </summary>
+        public bool SetPreferredShippingAddressByString(string aAddressString)
+        {
+            if(mAddresses[0].ToString() == aAddressString)
+            {
+                return true;
+            }
+
+            for (int i=0; i < mAddresses.Count; i++)
+            {
+                if(aAddressString == mAddresses[i].ToString())
+                {
+                    //swap them
+                    Address tmp = mAddresses[0];
+                    mAddresses[0] = mAddresses[i];
+                    mAddresses[i] = tmp; 
+                }
+            }
+            return false;
         }
 
 
@@ -69,7 +114,7 @@ namespace ProfileManagerLib
         public bool ChangePassword(String aCurPassword, string aNewPassword)
         {
             mPassword = (aCurPassword == mPassword ? aNewPassword : mPassword);
-            return (aCurPassword == mPassword);
+            return (aNewPassword == mPassword);
         }
 
         /// <summary>

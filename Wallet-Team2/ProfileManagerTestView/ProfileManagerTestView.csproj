@@ -50,6 +50,18 @@
     <Compile Include="AddUser.Designer.cs">
       <DependentUpon>AddUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditAddress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditAddress.Designer.cs">
+      <DependentUpon>EditAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordChange.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordChange.Designer.cs">
+      <DependentUpon>PasswordChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewDB.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +72,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddUser.resx">
       <DependentUpon>AddUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditAddress.resx">
+      <DependentUpon>EditAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordChange.resx">
+      <DependentUpon>PasswordChange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewDB.resx">
       <DependentUpon>ViewDB.cs</DependentUpon>

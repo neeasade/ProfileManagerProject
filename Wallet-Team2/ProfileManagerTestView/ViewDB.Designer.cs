@@ -41,6 +41,8 @@
             this.uxOpenDB = new System.Windows.Forms.OpenFileDialog();
             this.uxSaveDB = new System.Windows.Forms.SaveFileDialog();
             this.button5 = new System.Windows.Forms.Button();
+            this.uxLoggedIn = new System.Windows.Forms.Label();
+            this.uxLoggedOut = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uxUserBox
@@ -102,7 +104,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(37, 269);
+            this.button1.Location = new System.Drawing.Point(12, 301);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 23);
             this.button1.TabIndex = 6;
@@ -112,17 +114,17 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(269, 269);
+            this.button2.Location = new System.Drawing.Point(244, 301);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(179, 23);
+            this.button2.Size = new System.Drawing.Size(135, 23);
             this.button2.TabIndex = 7;
-            this.button2.Text = "Add Address to Current User";
+            this.button2.Text = "Edit Addresses";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(585, 258);
+            this.button3.Location = new System.Drawing.Point(504, 301);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -132,7 +134,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(585, 287);
+            this.button4.Location = new System.Drawing.Point(585, 301);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 9;
@@ -146,7 +148,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(143, 269);
+            this.button5.Location = new System.Drawing.Point(118, 301);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(120, 23);
             this.button5.TabIndex = 10;
@@ -154,11 +156,31 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // uxLoggedIn
+            // 
+            this.uxLoggedIn.AutoSize = true;
+            this.uxLoggedIn.Location = new System.Drawing.Point(12, 245);
+            this.uxLoggedIn.Name = "uxLoggedIn";
+            this.uxLoggedIn.Size = new System.Drawing.Size(35, 13);
+            this.uxLoggedIn.TabIndex = 11;
+            this.uxLoggedIn.Text = "label4";
+            // 
+            // uxLoggedOut
+            // 
+            this.uxLoggedOut.AutoSize = true;
+            this.uxLoggedOut.Location = new System.Drawing.Point(12, 270);
+            this.uxLoggedOut.Name = "uxLoggedOut";
+            this.uxLoggedOut.Size = new System.Drawing.Size(35, 13);
+            this.uxLoggedOut.TabIndex = 12;
+            this.uxLoggedOut.Text = "label5";
+            // 
             // ViewDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 322);
+            this.ClientSize = new System.Drawing.Size(675, 352);
+            this.Controls.Add(this.uxLoggedOut);
+            this.Controls.Add(this.uxLoggedIn);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -193,6 +215,8 @@
         private System.Windows.Forms.OpenFileDialog uxOpenDB;
         private System.Windows.Forms.SaveFileDialog uxSaveDB;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label uxLoggedIn;
+        private System.Windows.Forms.Label uxLoggedOut;
     }
 }
 

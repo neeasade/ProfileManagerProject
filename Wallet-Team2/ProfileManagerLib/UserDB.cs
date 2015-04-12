@@ -63,13 +63,20 @@ namespace ProfileManagerLib
                 List<Address> lUserAddresses = new List<Address>();
                 string[] lUserDBAddresses = lUserDB[++i].Split('|');
 
-               //make the address list
-                for (int j=0; j < lUserDBAddresses.Length; j++)
+                //Do we have aany addresses for this user?
+                if(lUserDBAddresses.Length == 1 && lUserDBAddresses[0] == "")
                 {
-                    string[] lAddrInfo = lUserDBAddresses[j].Split('+');
-                    lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4], lAddrInfo[5]));
+                    lUserAddresses = new List<Address>();
                 }
-
+                else
+                {
+                   //make the address list
+                    for (int j=0; j < lUserDBAddresses.Length; j++)
+                    {
+                        string[] lAddrInfo = lUserDBAddresses[j].Split('+');
+                        lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4], lAddrInfo[5]));
+                    }
+                }
                 //add the new user to the User DB list
                 mUsers.Add(new User(lUserInfo[0], lUserInfo[1], lUserInfo[2], lUserInfo[3], lUserInfo[4], lUserInfo[5], lUserInfo[6], lUserAddresses));
             }

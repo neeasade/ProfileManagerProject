@@ -10,20 +10,6 @@
       </annotatedElements>
     </comment>
   </ownedCommentsInternal>
-  <profileInstances>
-    <packageHasProfileInstances Id="15923d2e-448c-4a41-91d9-8b7d7d2ef6df">
-      <profileInstance Id="c153f53f-28bf-41f4-80f2-a472e899def3" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="ab8fe683-607d-4db7-8b4a-f59cf3432152">
-      <profileInstance Id="1c8a16e8-008a-44a6-af51-5029fa173937" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
       <referencedType Id="06dfa6cd-f6d4-46a0-9ff3-d8df966ba92d" name="mName" isAbstract="false" isLeaf="false" cachedFullName="mName">
@@ -725,5 +711,19 @@
   </packagedElements>
   <package Id="28485b0f-3c53-4ff2-8e33-0f8822d94f66" name="ProfileManagerDiagram">
     <elementDefinition Id="491ec288-0fdc-4e4f-83b5-c767339c6602" />
+    <profileInstances>
+      <packageHasProfileInstances Id="15923d2e-448c-4a41-91d9-8b7d7d2ef6df">
+        <profileInstance Id="c153f53f-28bf-41f4-80f2-a472e899def3" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="ab8fe683-607d-4db7-8b4a-f59cf3432152">
+        <profileInstance Id="1c8a16e8-008a-44a6-af51-5029fa173937" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>

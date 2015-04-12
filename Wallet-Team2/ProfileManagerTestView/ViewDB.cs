@@ -46,10 +46,24 @@ namespace ProfileManagerTestView
        private void LoadDisplay()
         {
            uxUserBox.Items.Clear();
+           uxCurUserInfoBox.Items.Clear();
+           uxCurUserAddrBox.Items.Clear();
+           uxLoggedIn.Text = "LoggedIn: ";
+           uxLoggedOut.Text = "LoggedOut: ";
            foreach(User lUser in mUserDB.mUsers)
            {
                uxUserBox.Items.Add(lUser.mUserName);
+               if (lUser.mLoggedIn)
+               {
+                   uxLoggedIn.Text += lUser.mName + ",";
+               }
+               else
+               {
+                   uxLoggedOut.Text += lUser.mName + ",";
+               }
            }
+
+           
         }
 
         private void UpdateDisplay()
@@ -102,7 +116,10 @@ namespace ProfileManagerTestView
 
         private void button2_Click(object sender, EventArgs e)
         {
-    
+            EditAddress lEditAddressForm = new EditAddress();
+            lEditAddressForm.mUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
+            lEditAddressForm.loadDisplay();
+            lEditAddressForm.ShowDialog();
         }
 
         private void button1_Click(object sender, EventArgs e)

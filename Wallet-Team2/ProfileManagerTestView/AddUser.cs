@@ -64,6 +64,7 @@ namespace ProfileManagerTestView
                 lUser.mPhoneNumber = uxPhoneNumber.Text;
                 lUser.mRecoveryAnswer = uxRecoveryAnswer.Text;
                 lUser.mRecoveryQuestion = uxRecoveryQuestion.Text;
+                this.Close();
             }
             else if (mMode == "add")
             {
@@ -72,12 +73,20 @@ namespace ProfileManagerTestView
                 {
                     User lNewUser = new User(uxUsername.Text, uxName.Text, uxEmail.Text,uxPassword.Text,uxRecoveryQuestion.Text,uxRecoveryAnswer.Text,uxPhoneNumber.Text,new List<Address>() );
                     mViewDBForm.mUserDB.AddUser(lNewUser);
+                    this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Password not confirmed!");
                 }
             }
+        }
+
+        private void uxPasswordChange_Click(object sender, EventArgs e)
+        {
+            PasswordChange lPassChangeForm = new PasswordChange();
+            lPassChangeForm.mUser = mViewDBForm.mUserDB.findUser(uxUsername.Text);
+            lPassChangeForm.ShowDialog();
         }
     }
 }
