@@ -17,14 +17,14 @@ namespace ProfileManagerLib
 
     public class User
     {
-        String mName;
-        String mUserName;
-        List<Address> mAddresses;
-        String mEmail;
-        String mPassword;
-        String mRecoveryQuestion;
-        String mRecoveryAnswer;
-        String mPhoneNumber;
+        public string mName;
+        public string mUserName;
+        public List<Address> mAddresses;
+        public string mEmail;
+        public string mPassword;
+        public string mRecoveryQuestion;
+        public string mRecoveryAnswer;
+        public string mPhoneNumber;
 
         /// <summary>
         /// Add an existing address object to the list of addresses.
@@ -52,12 +52,12 @@ namespace ProfileManagerLib
         {
              mName = aName;
              mUserName = aUserName;
-             List<Address> mAddress = aAddressList;
              mEmail = aEmail;
              mPassword = aPassword;
              mRecoveryQuestion = aRecoveryQuestion;
              mRecoveryAnswer = aRecoveryAnswer;
              mPhoneNumber = aPhoneNumber;
+             mAddresses = aAddressList;
         }
 
         /// <summary>
@@ -83,7 +83,6 @@ namespace ProfileManagerLib
 
         /// <summary>
         /// To be used by the UserDB for storage purposes. DO NOT USE
-        /// Format will be 
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -101,8 +100,10 @@ namespace ProfileManagerLib
             for(int i=0; i<mAddresses.Count;i++)
             {
                 toReturn += mAddresses[i].toDBString();
-                toReturn += lDelim;
+                toReturn += lDelim; 
             }
+            //trim off the last lDelim:
+            toReturn = toReturn.Substring(0, toReturn.Length - 2);
             return toReturn + "\n";
         }
     }

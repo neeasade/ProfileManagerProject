@@ -10,7 +10,25 @@ namespace ProfileManagerLib
     public class UserDB
     {
         string mDatabaseLocation;
-        List<User> mUsers;
+        public List<User> mUsers;
+
+        /// <summary>
+        /// Get a user who's username matches the passed parameter
+        /// </summary>
+        /// <param name="aUserName"></param>
+        /// <returns>Returns the matching user, or throws an exception if the user does not exist.</returns>
+        public User findUser(string aUserName)
+        {
+            for (int i=0; i< mUsers.Count; i++)
+            {
+                if(mUsers[i].mUserName == aUserName)
+                {
+                    return mUsers[i];
+                }
+            }
+
+            throw new Exception("User Not Found");
+        }
 
         /// <summary>
         /// Add a new user to the database
@@ -46,7 +64,7 @@ namespace ProfileManagerLib
                 string[] lUserDBAddresses = lUserDB[++i].Split('|');
 
                //make the address list
-                for (int j; j<lUserDBAddresses.Length; j++)
+                for (int j=0; j < lUserDBAddresses.Length; j++)
                 {
                     string[] lAddrInfo = lUserDBAddresses[j].Split('+');
                     lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4], lAddrInfo[5]));
@@ -66,9 +84,15 @@ namespace ProfileManagerLib
         {
             List<string> lSaveContent = new List<string>();
 
+
+
             for (int i=0;i<mUsers.Count;i++)
             {
-                lSaveContent.Add(mUsers[i].ToString());
+                string UserString = mUsers[i].ToString();
+                string UserDBString = UserString.Split('\n')[0];
+                string AddressDBString = UserString.Split('\n')[1];
+                lSaveContent.Add(UserDBString);
+                lSaveContent.Add(AddressDBString);
             }
 
             //return the success of writing the file.

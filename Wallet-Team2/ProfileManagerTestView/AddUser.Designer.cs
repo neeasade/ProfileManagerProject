@@ -36,7 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.uxPhoneNumber = new System.Windows.Forms.TextBox();
-            this.uxPasswordConfirm = new System.Windows.Forms.TextBox();
+            this.uxConfirmPassword = new System.Windows.Forms.TextBox();
             this.uxPassword = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -44,7 +44,8 @@
             this.uxRecoveryAnswer = new System.Windows.Forms.TextBox();
             this.uxRecoveryQuestion = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.uxAddUser = new System.Windows.Forms.Button();
+            this.uxSave = new System.Windows.Forms.Button();
+            this.uxPasswordChange = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -67,21 +68,21 @@
             // 
             // uxName
             // 
-            this.uxName.Location = new System.Drawing.Point(106, 6);
+            this.uxName.Location = new System.Drawing.Point(114, 6);
             this.uxName.Name = "uxName";
             this.uxName.Size = new System.Drawing.Size(100, 20);
             this.uxName.TabIndex = 2;
             // 
             // uxUsername
             // 
-            this.uxUsername.Location = new System.Drawing.Point(106, 32);
+            this.uxUsername.Location = new System.Drawing.Point(114, 32);
             this.uxUsername.Name = "uxUsername";
             this.uxUsername.Size = new System.Drawing.Size(100, 20);
             this.uxUsername.TabIndex = 3;
             // 
             // uxEmail
             // 
-            this.uxEmail.Location = new System.Drawing.Point(106, 58);
+            this.uxEmail.Location = new System.Drawing.Point(114, 58);
             this.uxEmail.Name = "uxEmail";
             this.uxEmail.Size = new System.Drawing.Size(100, 20);
             this.uxEmail.TabIndex = 4;
@@ -106,21 +107,21 @@
             // 
             // uxPhoneNumber
             // 
-            this.uxPhoneNumber.Location = new System.Drawing.Point(106, 136);
+            this.uxPhoneNumber.Location = new System.Drawing.Point(114, 136);
             this.uxPhoneNumber.Name = "uxPhoneNumber";
             this.uxPhoneNumber.Size = new System.Drawing.Size(100, 20);
             this.uxPhoneNumber.TabIndex = 10;
             // 
-            // uxPasswordConfirm
+            // uxConfirmPassword
             // 
-            this.uxPasswordConfirm.Location = new System.Drawing.Point(106, 110);
-            this.uxPasswordConfirm.Name = "uxPasswordConfirm";
-            this.uxPasswordConfirm.Size = new System.Drawing.Size(100, 20);
-            this.uxPasswordConfirm.TabIndex = 9;
+            this.uxConfirmPassword.Location = new System.Drawing.Point(114, 110);
+            this.uxConfirmPassword.Name = "uxConfirmPassword";
+            this.uxConfirmPassword.Size = new System.Drawing.Size(100, 20);
+            this.uxConfirmPassword.TabIndex = 9;
             // 
             // uxPassword
             // 
-            this.uxPassword.Location = new System.Drawing.Point(106, 84);
+            this.uxPassword.Location = new System.Drawing.Point(114, 84);
             this.uxPassword.Name = "uxPassword";
             this.uxPassword.Size = new System.Drawing.Size(100, 20);
             this.uxPassword.TabIndex = 8;
@@ -154,14 +155,14 @@
             // 
             // uxRecoveryAnswer
             // 
-            this.uxRecoveryAnswer.Location = new System.Drawing.Point(106, 188);
+            this.uxRecoveryAnswer.Location = new System.Drawing.Point(114, 188);
             this.uxRecoveryAnswer.Name = "uxRecoveryAnswer";
             this.uxRecoveryAnswer.Size = new System.Drawing.Size(100, 20);
             this.uxRecoveryAnswer.TabIndex = 14;
             // 
             // uxRecoveryQuestion
             // 
-            this.uxRecoveryQuestion.Location = new System.Drawing.Point(106, 162);
+            this.uxRecoveryQuestion.Location = new System.Drawing.Point(114, 162);
             this.uxRecoveryQuestion.Name = "uxRecoveryQuestion";
             this.uxRecoveryQuestion.Size = new System.Drawing.Size(100, 20);
             this.uxRecoveryQuestion.TabIndex = 13;
@@ -175,28 +176,39 @@
             this.label8.TabIndex = 12;
             this.label8.Text = "Recovery Question";
             // 
-            // uxAddUser
+            // uxSave
             // 
-            this.uxAddUser.Location = new System.Drawing.Point(106, 214);
-            this.uxAddUser.Name = "uxAddUser";
-            this.uxAddUser.Size = new System.Drawing.Size(75, 23);
-            this.uxAddUser.TabIndex = 16;
-            this.uxAddUser.Text = "AddUser";
-            this.uxAddUser.UseVisualStyleBackColor = true;
+            this.uxSave.Location = new System.Drawing.Point(125, 214);
+            this.uxSave.Name = "uxSave";
+            this.uxSave.Size = new System.Drawing.Size(75, 23);
+            this.uxSave.TabIndex = 16;
+            this.uxSave.Text = "Save";
+            this.uxSave.UseVisualStyleBackColor = true;
+            this.uxSave.Click += new System.EventHandler(this.uxSave_Click);
+            // 
+            // uxPasswordChange
+            // 
+            this.uxPasswordChange.Location = new System.Drawing.Point(125, 244);
+            this.uxPasswordChange.Name = "uxPasswordChange";
+            this.uxPasswordChange.Size = new System.Drawing.Size(75, 23);
+            this.uxPasswordChange.TabIndex = 17;
+            this.uxPasswordChange.Text = "Change Password";
+            this.uxPasswordChange.UseVisualStyleBackColor = true;
             // 
             // AddUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(277, 272);
-            this.Controls.Add(this.uxAddUser);
+            this.ClientSize = new System.Drawing.Size(288, 279);
+            this.Controls.Add(this.uxPasswordChange);
+            this.Controls.Add(this.uxSave);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.uxRecoveryAnswer);
             this.Controls.Add(this.uxRecoveryQuestion);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.uxPhoneNumber);
-            this.Controls.Add(this.uxPasswordConfirm);
+            this.Controls.Add(this.uxConfirmPassword);
             this.Controls.Add(this.uxPassword);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
@@ -208,6 +220,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddUser";
             this.Text = "AddUser";
+            this.Load += new System.EventHandler(this.AddUser_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,7 +236,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox uxPhoneNumber;
-        private System.Windows.Forms.TextBox uxPasswordConfirm;
+        private System.Windows.Forms.TextBox uxConfirmPassword;
         private System.Windows.Forms.TextBox uxPassword;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -231,6 +244,7 @@
         private System.Windows.Forms.TextBox uxRecoveryAnswer;
         private System.Windows.Forms.TextBox uxRecoveryQuestion;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button uxAddUser;
+        private System.Windows.Forms.Button uxSave;
+        private System.Windows.Forms.Button uxPasswordChange;
     }
 }
