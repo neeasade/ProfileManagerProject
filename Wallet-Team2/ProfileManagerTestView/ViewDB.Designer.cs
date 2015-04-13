@@ -43,6 +43,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.uxLoggedIn = new System.Windows.Forms.Label();
             this.uxLoggedOut = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxUserBox
@@ -114,9 +115,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(244, 301);
+            this.button2.Location = new System.Drawing.Point(210, 301);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(135, 23);
+            this.button2.Size = new System.Drawing.Size(105, 23);
             this.button2.TabIndex = 7;
             this.button2.Text = "Edit Addresses";
             this.button2.UseVisualStyleBackColor = true;
@@ -150,7 +151,7 @@
             // 
             this.button5.Location = new System.Drawing.Point(118, 301);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(120, 23);
+            this.button5.Size = new System.Drawing.Size(86, 23);
             this.button5.TabIndex = 10;
             this.button5.Text = "Edit User";
             this.button5.UseVisualStyleBackColor = true;
@@ -174,11 +175,22 @@
             this.uxLoggedOut.TabIndex = 12;
             this.uxLoggedOut.Text = "label5";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(321, 301);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 13;
+            this.button6.Text = "Log In";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // ViewDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 352);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.uxLoggedOut);
             this.Controls.Add(this.uxLoggedIn);
             this.Controls.Add(this.button5);
@@ -193,7 +205,7 @@
             this.Controls.Add(this.uxCurUserInfoBox);
             this.Controls.Add(this.uxUserBox);
             this.Name = "ViewDB";
-            this.Text = "Form1";
+            this.Text = "UserDB Overview";
             this.Load += new System.EventHandler(this.ViewDB_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -217,6 +229,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label uxLoggedIn;
         private System.Windows.Forms.Label uxLoggedOut;
+        private System.Windows.Forms.Button button6;
     }
 }
 

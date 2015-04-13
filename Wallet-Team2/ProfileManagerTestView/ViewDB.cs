@@ -120,6 +120,7 @@ namespace ProfileManagerTestView
             lEditAddressForm.mUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
             lEditAddressForm.loadDisplay();
             lEditAddressForm.ShowDialog();
+            LoadDisplay();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -139,5 +140,39 @@ namespace ProfileManagerTestView
             lAddUserForm.ShowDialog();
             LoadDisplay();
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            User lUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
+            lUser.mLoggedIn = (Prompt.ShowDialog("Enter password for " + lUser.mUserName, "Enter password") == lUser.mPassword);
+            LoadDisplay();
+        }
     }
+
+    public static class Prompt
+    {
+
+        //stackoverflow code :^)
+        public static string ShowDialog(string text, string caption)
+        {
+            Form prompt = new Form();
+            prompt.Width = 500;
+            prompt.Height = 150;
+            prompt.FormBorderStyle = FormBorderStyle.FixedDialog;
+            prompt.Text = caption;
+            prompt.StartPosition = FormStartPosition.CenterScreen;
+            Label textLabel = new Label() { Left = 50, Top = 20, Width = 200, Text = text };
+            TextBox textBox = new TextBox() { Left = 50, Top = 50, Width = 400 };
+            Button confirmation = new Button() { Text = "Ok", Left = 350, Width = 100, Top = 70 };
+            confirmation.Click += (sender, e) => { prompt.Close(); };
+            prompt.Controls.Add(textBox);
+            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel);
+            prompt.AcceptButton = confirmation;
+            prompt.ShowDialog();
+            return textBox.Text;
+        }
+    }
+
+
 }
