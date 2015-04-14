@@ -85,7 +85,7 @@ namespace ProfileManagerTestView
         private void uxPasswordChange_Click(object sender, EventArgs e)
         {
             PasswordChange lPassChangeForm = new PasswordChange();
-            lPassChangeForm.mUser = mViewDBForm.mUserDB.findUser(uxUsername.Text);
+            lPassChangeForm.mUser = mViewDBForm.mUserDB.findUser(uxEmail.Text);
             lPassChangeForm.ShowDialog();
         }
     }

@@ -71,7 +71,7 @@ namespace ProfileManagerLib
             mUsers = new List<User>();
 
             //populate the lists of users 
-            string[] lUserDB = File.ReadAllLines(aUserDBLocation);
+            string[] lUserDB = cypher(File.ReadAllLines(aUserDBLocation).ToList<string>(), true).ToArray();
 
             for (int i=0; i< lUserDB.Length; i++)
             {
@@ -116,8 +116,32 @@ namespace ProfileManagerLib
             }
 
             //return the success of writing the file.
-            File.WriteAllLines(aSaveLocation, lSaveContent.ToArray());
+            File.WriteAllLines(aSaveLocation, cypher(lSaveContent, false).ToArray());
             return File.Exists(aSaveLocation);
         }
+
+        public List<string> cypher(List<string> aInput, bool uncypher)
+        {
+            List<string> toReturn = new List<string>();
+            foreach(string aLine in aInput)
+            {
+                string result = string.Empty;
+                foreach (char lChar in aLine)
+                {
+                    if(uncypher)
+                    {
+                        result += (char)(lChar - 10);
+                    }
+                    else
+                    {
+                        result += (char)(lChar + 10);
+                    }
+                }
+                toReturn.Add(result);
+            }
+            return toReturn;
+        }
+
+
     }
 }
