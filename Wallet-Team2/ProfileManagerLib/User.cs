@@ -10,13 +10,22 @@ namespace ProfileManagerLib
     {
         public string mName;
         public string mUserName;
-        public List<Address> mAddresses;
+        private List<Address> mAddresses;
         public string mEmail;
         public string mPassword;
         public string mRecoveryQuestion;
         public string mRecoveryAnswer;
         public string mPhoneNumber;
         public bool mLoggedIn;
+
+        /// <summary>
+        /// A Method to return the current list of current Addresses owned by the user, with the preferred Address in the first index.
+        /// </summary>
+        /// <returns></returns>
+        public List<Address> getAddresses()
+        {
+            return mAddresses;
+        }
 
         /// <summary>
         /// Clear all addresses that this user has.
@@ -71,6 +80,24 @@ namespace ProfileManagerLib
             {
                 mAddresses.Add(aAddressToAdd);
             }
+        }
+
+        /// <summary>
+        /// Remove and existing user address based on a matching Address objects ToString() method.
+        /// Returns false if the Address is not found.
+        /// </summary>
+        /// <param name="aAddressToString"></param>
+        public bool RemoveAddress(string aAddressToString)
+        {
+            for (int i=0; i < mAddresses.Count; i++)
+            {
+                if(aAddressToString == mAddresses[i].ToString())
+                {
+                    mAddresses.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
         }
 
 
@@ -144,7 +171,6 @@ namespace ProfileManagerLib
         {
             return (aRecoveryAnswer == mRecoveryAnswer ? mPassword : "");
         }
-
 
         /// <summary>
         /// Returns some information about the user that would be nice to have on a summary page of some sort.

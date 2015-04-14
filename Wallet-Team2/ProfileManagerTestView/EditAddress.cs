@@ -19,12 +19,13 @@ namespace ProfileManagerTestView
         {
             //terrible code
             Address lAddress;
+            List<Address> lUserAddresses = mUser.getAddresses();
 
             //load in the Address info for each address available from the User.
-            if(mUser.mAddresses.Count >= 1)
+            if(lUserAddresses.Count >= 1)
             {
                 uxPreferred1.Checked = true;
-                lAddress = mUser.mAddresses[0];
+                lAddress = lUserAddresses[0];
                 uxStreetNum1.Text = lAddress.mStreetNumber;
                 uxStreetName1.Text = lAddress.mStreet;
                 uxCityName1.Text = lAddress.mCity;
@@ -33,9 +34,9 @@ namespace ProfileManagerTestView
                 uxZipExt1.Text = lAddress.mZipExt;
             }
 
-            if(mUser.mAddresses.Count >= 2)
+            if(lUserAddresses.Count >= 2)
             {
-                lAddress = mUser.mAddresses[1];
+                lAddress = lUserAddresses[1];
                 uxStreetNum2.Text = lAddress.mStreetNumber;
                 uxStreetName2.Text = lAddress.mStreet;
                 uxCityName2.Text = lAddress.mCity;
@@ -44,9 +45,9 @@ namespace ProfileManagerTestView
                 uxZipExt2.Text = lAddress.mZipExt;
             }
 
-            if(mUser.mAddresses.Count >= 3)
+            if(lUserAddresses.Count >= 3)
             {
-                lAddress = mUser.mAddresses[2];
+                lAddress = lUserAddresses[2];
                 uxStreetNum3.Text = lAddress.mStreetNumber;
                 uxStreetName3.Text = lAddress.mStreet;
                 uxCityName3.Text = lAddress.mCity;
@@ -55,9 +56,9 @@ namespace ProfileManagerTestView
                 uxZipExt3.Text = lAddress.mZipExt;
             }
 
-            if(mUser.mAddresses.Count >= 4)
+            if(lUserAddresses.Count >= 4)
             {
-                lAddress = mUser.mAddresses[3];
+                lAddress = lUserAddresses[3];
                 uxStreetNum4.Text = lAddress.mStreetNumber;
                 uxStreetName4.Text = lAddress.mStreet;
                 uxCityName4.Text = lAddress.mCity;
@@ -66,9 +67,9 @@ namespace ProfileManagerTestView
                 uxZipExt4.Text = lAddress.mZipExt;
             }
 
-            if(mUser.mAddresses.Count >= 5)
+            if(lUserAddresses.Count >= 5)
             {
-                lAddress = mUser.mAddresses[4];
+                lAddress = lUserAddresses[4];
                 uxStreetNum5.Text = lAddress.mStreetNumber;
                 uxStreetName5.Text = lAddress.mStreet;
                 uxCityName5.Text = lAddress.mCity;
@@ -76,7 +77,6 @@ namespace ProfileManagerTestView
                 uxZip5.Text = lAddress.mZip;
                 uxZipExt5.Text = lAddress.mZipExt;
             }
-
         }
 
         public EditAddress()
@@ -88,6 +88,8 @@ namespace ProfileManagerTestView
         {
             mUser.ClearAddresses();
             Address lAddress;
+
+            //SHIELD YOUR EYES
 
             //check if all spaces are empty for each line, and if not, add them.
             if(uxStreetNum1.Text != "" && uxStreetName1.Text != "" && uxCityName1.Text != "" && uxState1.Text != "" && uxZip1.Text != "")

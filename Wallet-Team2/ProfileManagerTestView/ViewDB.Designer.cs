@@ -45,6 +45,8 @@
             this.uxLoggedOut = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxUserBox
@@ -106,7 +108,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 301);
+            this.button1.Location = new System.Drawing.Point(205, 302);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(77, 23);
             this.button1.TabIndex = 6;
@@ -116,9 +118,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(175, 301);
+            this.button2.Location = new System.Drawing.Point(288, 331);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 23);
+            this.button2.Size = new System.Drawing.Size(85, 23);
             this.button2.TabIndex = 7;
             this.button2.Text = "Edit Addresses";
             this.button2.UseVisualStyleBackColor = true;
@@ -126,7 +128,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(504, 301);
+            this.button3.Location = new System.Drawing.Point(591, 302);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -136,7 +138,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(585, 301);
+            this.button4.Location = new System.Drawing.Point(591, 331);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 9;
@@ -150,9 +152,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(95, 301);
+            this.button5.Location = new System.Drawing.Point(288, 302);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(74, 23);
+            this.button5.Size = new System.Drawing.Size(85, 23);
             this.button5.TabIndex = 10;
             this.button5.Text = "Edit User";
             this.button5.UseVisualStyleBackColor = true;
@@ -178,9 +180,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(277, 301);
+            this.button6.Location = new System.Drawing.Point(379, 302);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(88, 23);
             this.button6.TabIndex = 13;
             this.button6.Text = "Log In";
             this.button6.UseVisualStyleBackColor = true;
@@ -188,7 +190,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(358, 301);
+            this.button7.Location = new System.Drawing.Point(379, 331);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(88, 23);
             this.button7.TabIndex = 14;
@@ -196,11 +198,33 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(473, 331);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(112, 23);
+            this.button8.TabIndex = 15;
+            this.button8.Text = "Lookup Username";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(473, 302);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(112, 23);
+            this.button9.TabIndex = 16;
+            this.button9.Text = "Recover Password";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // ViewDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 339);
+            this.ClientSize = new System.Drawing.Size(675, 364);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.uxLoggedOut);
@@ -243,6 +267,8 @@
         private System.Windows.Forms.Label uxLoggedOut;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 

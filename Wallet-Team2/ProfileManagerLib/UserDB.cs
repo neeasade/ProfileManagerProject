@@ -9,14 +9,16 @@ namespace ProfileManagerLib
 {
     public class UserDB
     {
+
+        //List of Users loaded in the DB
         public List<User> mUsers;
 
         /// <summary>
-        /// Get a user who has the email in the parameter
+        /// Get a user who has the email in the parameter - Throws an exception if the user does not exist.
         /// </summary>
         /// <param name="aUserName"></param>
         /// <returns>Returns the matching user, or throws an exception if the user does not exist.</returns>
-        public User findUser(string aEmail)
+        public User FindUser(string aEmail)
         {
             for (int i=0; i< mUsers.Count; i++)
             {
@@ -26,6 +28,23 @@ namespace ProfileManagerLib
                 }
             }
             throw new Exception("User Not Found");
+        }
+
+        /// <summary>
+        /// Returns a string containing the Username associated with an Email in the UserDB, else returns 'not found'
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <returns></returns>
+        public string FindUserName(string aEmail)
+        {
+            for (int i =0;i< mUsers.Count;i++)
+            {
+                if(mUsers[i].mEmail == aEmail)
+                {
+                    return mUsers[i].mUserName;
+                }
+            }
+            return "not found";
         }
 
         /// <summary>
@@ -70,7 +89,7 @@ namespace ProfileManagerLib
         {
             mUsers = new List<User>();
 
-            //populate the lists of users 
+            //populate the lists of users                               -ayy lmao-
             string[] lUserDB = cypher(File.ReadAllLines(aUserDBLocation).ToList<string>(), true).ToArray();
 
             for (int i=0; i< lUserDB.Length; i++)
@@ -120,7 +139,13 @@ namespace ProfileManagerLib
             return File.Exists(aSaveLocation);
         }
 
-        public List<string> cypher(List<string> aInput, bool uncypher)
+        /// <summary>
+        /// cool haxxor storing method
+        /// </summary>
+        /// <param name="aInput"></param>
+        /// <param name="uncypher"></param>
+        /// <returns></returns>
+        private List<string> cypher(List<string> aInput, bool uncypher)
         {
             List<string> toReturn = new List<string>();
             foreach(string aLine in aInput)
@@ -141,7 +166,5 @@ namespace ProfileManagerLib
             }
             return toReturn;
         }
-
-
     }
 }

@@ -58,7 +58,7 @@ namespace ProfileManagerTestView
             if (mMode == "edit")
             {
                 //editing an existing user
-                User lUser = mViewDBForm.mUserDB.findUser(uxEmail.Text);
+                User lUser = mViewDBForm.mUserDB.FindUser(uxEmail.Text);
                 lUser.mName = uxName.Text;
                 lUser.mUserName = uxUsername.Text;
                 lUser.mPhoneNumber = uxPhoneNumber.Text;
@@ -85,7 +85,7 @@ namespace ProfileManagerTestView
         private void uxPasswordChange_Click(object sender, EventArgs e)
         {
             PasswordChange lPassChangeForm = new PasswordChange();
-            lPassChangeForm.mUser = mViewDBForm.mUserDB.findUser(uxEmail.Text);
+            lPassChangeForm.mUser = mViewDBForm.mUserDB.FindUser(uxEmail.Text);
             lPassChangeForm.ShowDialog();
         }
     }

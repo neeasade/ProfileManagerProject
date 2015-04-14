@@ -37,7 +37,7 @@ namespace ProfileManagerTestView
         private void ViewDB_Load(object sender, EventArgs e)
         {
             //Make a 'dummy' database with 3 users.
-            mUserDB = new UserDB(3);
+            mUserDB = new UserDB(8);
 
             //Now that we have a database, load it into the listboxes.
             LoadDisplay();
@@ -77,7 +77,7 @@ namespace ProfileManagerTestView
         private void UpdateDisplay()
         {
             //get current User selected(listbox 'items' are strings:
-            User lUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
+            User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
 
             //populate the middle box with that Users info(clear it first):
             uxCurUserInfoBox.Items.Clear();
@@ -91,7 +91,7 @@ namespace ProfileManagerTestView
 
             //populate the right box with that Users Adress information:
             uxCurUserAddrBox.Items.Clear();
-            foreach (Address lAddress in lUser.mAddresses)
+            foreach (Address lAddress in lUser.getAddresses())
             {
                 uxCurUserAddrBox.Items.Add(lAddress.ToString());
             }
@@ -142,7 +142,7 @@ namespace ProfileManagerTestView
         private void button2_Click(object sender, EventArgs e)
         {
             EditAddress lEditAddressForm = new EditAddress();
-            lEditAddressForm.mUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
+            lEditAddressForm.mUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
             lEditAddressForm.loadDisplay();
             lEditAddressForm.ShowDialog();
             UpdateDisplay();
@@ -174,7 +174,7 @@ namespace ProfileManagerTestView
             {
                 AddUser lAddUserForm = new AddUser();
                 lAddUserForm.mViewDBForm = this;
-                lAddUserForm.setMode("edit", mUserDB.findUser(uxUserBox.SelectedItem.ToString()));
+                lAddUserForm.setMode("edit", mUserDB.FindUser(uxUserBox.SelectedItem.ToString()));
                 lAddUserForm.ShowDialog();
                 UpdateDisplay();
             }
@@ -189,18 +189,56 @@ namespace ProfileManagerTestView
         {
             if (UserSelected())
             {
-                User lUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
+                User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
                 lUser.mLoggedIn = (Prompt.ShowDialog("Enter password for " + lUser.mUserName, "Enter password") == lUser.mPassword);
                 LoadDisplay();
             }
         }
 
+        /// <summary>
+        /// Display a User's ToString() method.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button7_Click(object sender, EventArgs e)
         {
             if(UserSelected())
             {
-                MessageBox.Show(mUserDB.findUser(uxUserBox.SelectedItem.ToString()).ToString());
+                MessageBox.Show(mUserDB.FindUser(uxUserBox.SelectedItem.ToString()).ToString());
             }
+        }
+
+        /// <summary>
+        /// Recover a password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if(UserSelected())
+            {
+                User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
+                string response = lUser.RecoverPassword(Prompt.ShowDialog( lUser.mRecoveryQuestion,"Password recovery"));
+                if(response == string.Empty)
+                {
+                    MessageBox.Show("That was the wrong recovery question answer.");
+                }
+                else
+                {
+                    MessageBox.Show("Your password is :" + response);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Recover a Username by entering an email.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string response = mUserDB.FindUserName(Prompt.ShowDialog( "Enter a Users email to find the Username associated with it:","Find Username"));
+            MessageBox.Show("The username for that email is " + response);
         }
     }
 
