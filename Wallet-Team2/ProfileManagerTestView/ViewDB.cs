@@ -20,24 +20,24 @@ namespace ProfileManagerTestView
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Check if a user is selected to do operations on.
+        /// </summary>
+        /// <returns></returns>
+        private bool UserSelected()
+        {
+            if (uxUserBox.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a user first");
+                return false;
+            }
+            return true;
+        }
+
         private void ViewDB_Load(object sender, EventArgs e)
         {
-
-            //Make an empty database, and add a new user with an address to it.
-            mUserDB = new UserDB();
-            List<Address> lAddrList = new List<Address>();
-            List<Address> lAddrList2 = new List<Address>();
-            List<Address> lAddrList3 = new List<Address>();
-            lAddrList.Add(new Address("123","oak st","manhattan","KS","66502",""));
-            lAddrList2.Add(new Address("6969","oak st","manhattan","KS","66502",""));
-            lAddrList2.Add(new Address("234","oak st","manhattan","KS","66502",""));
-            lAddrList3.Add(new Address("345","oak st","manhattan","KS","66502","838"));
-            User lUser = new User("username1", "name1", "email1@email.com", "pass1", "recovery question one?", "recovery answer one!", "696-9696", lAddrList);
-            User lUser2= new User("username2", "name2", "email2@email.com", "pass2", "recovery question two?", "recovery answer two!", "696-9696", lAddrList2);
-            User lUser3= new User("username3", "name3", "email3@email.com", "pass3", "recovery question three?", "recovery answer three!", "696-9696", lAddrList3);
-            mUserDB.AddUser(lUser);
-            mUserDB.AddUser(lUser2);
-            mUserDB.AddUser(lUser3);
+            //Make a 'dummy' database with 3 users.
+            mUserDB = new UserDB(3);
 
             //Now that we have a database, load it into the listboxes.
             LoadDisplay();
@@ -45,14 +45,17 @@ namespace ProfileManagerTestView
 
        private void LoadDisplay()
         {
+           //clear the list boxes
            uxUserBox.Items.Clear();
            uxCurUserInfoBox.Items.Clear();
            uxCurUserAddrBox.Items.Clear();
+
+           //populate the logged in logged out statuses
            uxLoggedIn.Text = "LoggedIn: ";
            uxLoggedOut.Text = "LoggedOut: ";
            foreach(User lUser in mUserDB.mUsers)
            {
-               uxUserBox.Items.Add(lUser.mUserName);
+               uxUserBox.Items.Add(lUser.mEmail);
                if (lUser.mLoggedIn)
                {
                    uxLoggedIn.Text += lUser.mName + ",";
@@ -63,7 +66,12 @@ namespace ProfileManagerTestView
                }
            }
 
-           
+           //select the first item and then call update display(if there are any items to select)
+           if(uxUserBox.Items.Count > 0)
+           {
+               uxUserBox.SelectedIndex = 0;
+               UpdateDisplay();
+           }
         }
 
         private void UpdateDisplay()
@@ -91,18 +99,30 @@ namespace ProfileManagerTestView
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult result = uxSaveDB.ShowDialog();
-            if(result == DialogResult.OK)
+            if (UserSelected())
             {
-                mUserDB.Save(uxSaveDB.FileName);
+                DialogResult result = uxSaveDB.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    mUserDB.Save(uxSaveDB.FileName);
+                }
             }
         }
 
+
+        /// <summary>
+        /// A new user has been selected, display that users info.
+        /// </summary>
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateDisplay();
         }
 
+        /// <summary>
+        /// Load a database from a textfile.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
             //open up a file dialog and then load that database:
@@ -114,15 +134,25 @@ namespace ProfileManagerTestView
             }
         }
 
+        /// <summary>
+        /// Pass the EditAddress form the current user, and open it.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
             EditAddress lEditAddressForm = new EditAddress();
             lEditAddressForm.mUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
             lEditAddressForm.loadDisplay();
             lEditAddressForm.ShowDialog();
-            LoadDisplay();
+            UpdateDisplay();
         }
 
+        /// <summary>
+        /// Add a new User to the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             AddUser lAddUserForm = new AddUser();
@@ -132,20 +162,45 @@ namespace ProfileManagerTestView
             LoadDisplay();
         }
 
+
+        /// <summary>
+        /// Edit the information of an existing user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            AddUser lAddUserForm = new AddUser();
-            lAddUserForm.mViewDBForm = this;
-            lAddUserForm.setMode("edit", mUserDB.findUser(uxUserBox.SelectedItem.ToString()));
-            lAddUserForm.ShowDialog();
-            LoadDisplay();
+            if (UserSelected())
+            {
+                AddUser lAddUserForm = new AddUser();
+                lAddUserForm.mViewDBForm = this;
+                lAddUserForm.setMode("edit", mUserDB.findUser(uxUserBox.SelectedItem.ToString()));
+                lAddUserForm.ShowDialog();
+                UpdateDisplay();
+            }
         }
 
+        /// <summary>
+        /// Log a user in
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button6_Click(object sender, EventArgs e)
         {
-            User lUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
-            lUser.mLoggedIn = (Prompt.ShowDialog("Enter password for " + lUser.mUserName, "Enter password") == lUser.mPassword);
-            LoadDisplay();
+            if (UserSelected())
+            {
+                User lUser = mUserDB.findUser(uxUserBox.SelectedItem.ToString());
+                lUser.mLoggedIn = (Prompt.ShowDialog("Enter password for " + lUser.mUserName, "Enter password") == lUser.mPassword);
+                LoadDisplay();
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if(UserSelected())
+            {
+                MessageBox.Show(mUserDB.findUser(uxUserBox.SelectedItem.ToString()).ToString());
+            }
         }
     }
 

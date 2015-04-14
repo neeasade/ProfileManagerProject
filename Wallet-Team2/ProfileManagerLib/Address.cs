@@ -24,7 +24,7 @@ namespace ProfileManagerLib
         public Address(string aStreetNumber,string aStreetName, string aCity, string aState, string aZip, string aZipExt){
           mStreetNumber = aStreetNumber;
           mZip = aZip;
-          mZipExt = aZip;
+          mZipExt = aZipExt;
           mStreet = aStreetName;
           mCity = aCity;
           mState = aState;
@@ -37,10 +37,13 @@ namespace ProfileManagerLib
         /// <returns></returns>
         public override string ToString()
         {
-            //account for if mStreet has 'st' in it nad add if it is not:
-            return mStreetNumber + " " + mStreet + ", " + mCity + ", " + mState + " " + mZip + mZipExt;
+            return mStreetNumber + " " + mStreet + ", " + mCity + ", " + mState + " " + mZip + " " + mZipExt;
         }
 
+        /// <summary>
+        /// Returns a string with the address parts delimited for storage in a db text file.
+        /// </summary>
+        /// <returns></returns>
         public string toDBString()
         {
             string lDelim = "+";

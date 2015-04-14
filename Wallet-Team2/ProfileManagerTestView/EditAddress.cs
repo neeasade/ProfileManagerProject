@@ -18,7 +18,6 @@ namespace ProfileManagerTestView
         public void loadDisplay()
         {
             //terrible code
-
             Address lAddress;
 
             //load in the Address info for each address available from the User.
@@ -87,70 +86,42 @@ namespace ProfileManagerTestView
 
         private void uxSave_Click(object sender, EventArgs e)
         {
-            //SHIELD YOUR EYES
-
-            Address[] lNewAddresses = new Address[5]; //List to store the new address information
-            bool[] isPopulated = new bool[5]; // array to check if an address line has been completely filled, to make sure a valid preferred is selected
+            mUser.ClearAddresses();
+            Address lAddress;
 
             //check if all spaces are empty for each line, and if not, add them.
             if(uxStreetNum1.Text != "" && uxStreetName1.Text != "" && uxCityName1.Text != "" && uxState1.Text != "" && uxZip1.Text != "")
             {
-                isPopulated[0] = true;
-                lNewAddresses[0] = (new Address(uxStreetNum1.Text, uxStreetName1.Text, uxCityName1.Text, uxState1.Text, uxZip1.Text, uxZipExt1.Text));
+                mUser.AddAddress(uxStreetNum1.Text, uxStreetName1.Text, uxCityName1.Text, uxState1.Text, uxZip1.Text, uxZipExt1.Text);
             }
             if(uxStreetNum2.Text != "" && uxStreetName2.Text != "" && uxCityName2.Text != "" && uxStateName2.Text != "" && uxZip2.Text != "")
             {
-                isPopulated[1] = true;
-                lNewAddresses[1] = (new Address(uxStreetNum2.Text, uxStreetName2.Text, uxCityName2.Text, uxStateName2.Text, uxZip2.Text, uxZipExt2.Text));
-
+                lAddress = (new Address(uxStreetNum2.Text, uxStreetName2.Text, uxCityName2.Text, uxStateName2.Text, uxZip2.Text, uxZipExt2.Text));
+                mUser.AddAddress(lAddress);
+                if (uxPreferred2.Checked)
+                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
             }
             if(uxStreetNum3.Text != "" && uxStreetName3.Text != "" && uxCityName3.Text != "" && uxStateName3.Text != "" && uxZip3.Text != "")
             {
-                isPopulated[2] = true;
-                lNewAddresses[2] = (new Address(uxStreetNum3.Text, uxStreetName3.Text, uxCityName3.Text, uxStateName3.Text, uxZip3.Text, uxZipExt3.Text));
+                lAddress = (new Address(uxStreetNum3.Text, uxStreetName3.Text, uxCityName3.Text, uxStateName3.Text, uxZip3.Text, uxZipExt3.Text));
+                mUser.AddAddress(lAddress);
+                if (uxPreferred3.Checked)
+                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
             }
             if(uxStreetNum4.Text != "" && uxStreetName4.Text != "" && uxCityName4.Text != "" && uxStateName4.Text != "" && uxZip4.Text != "")
             {
-                isPopulated[3] = true;
-                lNewAddresses[3] = (new Address(uxStreetNum4.Text, uxStreetName4.Text, uxCityName4.Text, uxStateName4.Text, uxZip4.Text, uxZipExt4.Text));
+                lAddress = (new Address(uxStreetNum4.Text, uxStreetName4.Text, uxCityName4.Text, uxStateName4.Text, uxZip4.Text, uxZipExt4.Text));
+                mUser.AddAddress(lAddress);
+                if (uxPreferred4.Checked)
+                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
             }
             if(uxStreetNum5.Text != "" && uxStreetName5.Text != "" && uxCityName5.Text != "" && uxStateName5.Text != "" && uxZip5.Text != "")
             {
-                isPopulated[4] = true;
-                lNewAddresses[4] = (new Address(uxStreetNum5.Text, uxStreetName5.Text, uxCityName5.Text, uxStateName5.Text, uxZip5.Text, uxZipExt5.Text));
+                lAddress = (new Address(uxStreetNum5.Text, uxStreetName5.Text, uxCityName5.Text, uxStateName5.Text, uxZip5.Text, uxZipExt5.Text));
+                mUser.AddAddress(lAddress);
+                if (uxPreferred5.Checked)
+                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
             }
-
-            //See which index was selected as preferred(0-4 indexing radio buttons)
-            bool[] preferredIndex=new bool[5];
-            preferredIndex[0] = uxPreferred1.Checked;
-            preferredIndex[1] = uxPreferred2.Checked;
-            preferredIndex[2] = uxPreferred3.Checked;
-            preferredIndex[3] = uxPreferred4.Checked;
-            preferredIndex[4] = uxPreferred5.Checked;
-
-            //Find the selected preferred, and then make it first index of addresses
-            //starting at 1, because if the first button is selected, it has already been made the preferred address.
-            for(int i=1;i<5;i++)
-            {
-                if(isPopulated[i] && preferredIndex[i])
-                {
-                    Address tmp = lNewAddresses[i];
-                    lNewAddresses[i] = lNewAddresses[0];
-                    lNewAddresses[0] = tmp;
-                }
-            }
-
-            //convert the array to a list of only populated addresses:
-            List<Address> lEndUserAddresses = new List<Address>();
-            for (int i=0; i < lNewAddresses.Length; i++)
-            {
-                if(lNewAddresses[i] != null)
-                {
-                    lEndUserAddresses.Add(lNewAddresses[i]);
-                }
-            }
-
-            mUser.mAddresses = lEndUserAddresses;
             this.Close();
         }
 

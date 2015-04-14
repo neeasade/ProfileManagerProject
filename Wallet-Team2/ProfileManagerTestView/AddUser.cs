@@ -27,7 +27,7 @@ namespace ProfileManagerTestView
                 uxRecoveryQuestion.Text = aUser.mRecoveryQuestion;
                 uxRecoveryAnswer.Text = aUser.mRecoveryAnswer;
                 uxPhoneNumber.Text = aUser.mPhoneNumber;
-                uxUsername.Enabled = false;
+                uxEmail.Enabled = false;
                 uxPassword.Enabled = false;
                 uxConfirmPassword.Enabled = false;
             }
@@ -35,7 +35,7 @@ namespace ProfileManagerTestView
             {
                 if(mMode == "add" )
                 {
-                    uxUsername.Enabled = true;
+                    uxEmail.Enabled = true;
                     uxPassword.Enabled = true;
                     uxConfirmPassword.Enabled = true;
                     uxPasswordChange.Hide();
@@ -58,9 +58,9 @@ namespace ProfileManagerTestView
             if (mMode == "edit")
             {
                 //editing an existing user
-                User lUser = mViewDBForm.mUserDB.findUser(uxUsername.Text);
+                User lUser = mViewDBForm.mUserDB.findUser(uxEmail.Text);
                 lUser.mName = uxName.Text;
-                lUser.mEmail = uxEmail.Text;
+                lUser.mUserName = uxUsername.Text;
                 lUser.mPhoneNumber = uxPhoneNumber.Text;
                 lUser.mRecoveryAnswer = uxRecoveryAnswer.Text;
                 lUser.mRecoveryQuestion = uxRecoveryQuestion.Text;
@@ -68,7 +68,7 @@ namespace ProfileManagerTestView
             }
             else if (mMode == "add")
             {
-                //adding in a new user
+                //adding in a new user, check if confirm password
                 if(uxPassword.Text == uxConfirmPassword.Text)
                 {
                     User lNewUser = new User(uxUsername.Text, uxName.Text, uxEmail.Text,uxPassword.Text,uxRecoveryQuestion.Text,uxRecoveryAnswer.Text,uxPhoneNumber.Text,new List<Address>() );
