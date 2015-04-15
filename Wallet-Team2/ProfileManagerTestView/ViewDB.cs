@@ -43,6 +43,9 @@ namespace ProfileManagerTestView
             LoadDisplay();
         }
 
+        /// <summary>
+        /// clear the boxes and refresh as if a fresh load, and populate the loggedIn and loggedOut labels.
+        /// </summary>
        private void LoadDisplay()
         {
            //clear the list boxes
@@ -53,16 +56,16 @@ namespace ProfileManagerTestView
            //populate the logged in logged out statuses
            uxLoggedIn.Text = "LoggedIn: ";
            uxLoggedOut.Text = "LoggedOut: ";
-           foreach(User lUser in mUserDB.mUsers)
+           foreach(User lUser in mUserDB.Users)
            {
-               uxUserBox.Items.Add(lUser.mEmail);
-               if (lUser.mLoggedIn)
+               uxUserBox.Items.Add(lUser.Email);
+               if (lUser.LoggedIn)
                {
-                   uxLoggedIn.Text += lUser.mName + ",";
+                   uxLoggedIn.Text += lUser.UserName+ ",";
                }
                else
                {
-                   uxLoggedOut.Text += lUser.mName + ",";
+                   uxLoggedOut.Text += lUser.UserName + ",";
                }
            }
 
@@ -81,31 +84,37 @@ namespace ProfileManagerTestView
 
             //populate the middle box with that Users info(clear it first):
             uxCurUserInfoBox.Items.Clear();
-            uxCurUserInfoBox.Items.Add(lUser.mUserName);
-            uxCurUserInfoBox.Items.Add(lUser.mName);
-            uxCurUserInfoBox.Items.Add(lUser.mEmail);
-            uxCurUserInfoBox.Items.Add(lUser.mPassword);
-            uxCurUserInfoBox.Items.Add(lUser.mRecoveryQuestion);
-            uxCurUserInfoBox.Items.Add(lUser.mRecoveryAnswer);
-            uxCurUserInfoBox.Items.Add(lUser.mPhoneNumber);
+            uxCurUserInfoBox.Items.Add(lUser.UserName);
+            uxCurUserInfoBox.Items.Add(lUser.Name);
+            uxCurUserInfoBox.Items.Add(lUser.Email);
+            uxCurUserInfoBox.Items.Add(lUser.Password);
+            uxCurUserInfoBox.Items.Add(lUser.RecoveryQuestion);
+            uxCurUserInfoBox.Items.Add(lUser.RecoveryAnswer);
+            uxCurUserInfoBox.Items.Add(lUser.PhoneNumber);
 
             //populate the right box with that Users Adress information:
             uxCurUserAddrBox.Items.Clear();
-            foreach (Address lAddress in lUser.getAddresses())
+            List<Address> lAddresses = lUser.getAddresses();
+
+            if(lAddresses != null)
             {
-                uxCurUserAddrBox.Items.Add(lAddress.ToString());
+                foreach (Address lAddress in lAddresses)
+                {
+                    uxCurUserAddrBox.Items.Add(lAddress.ToString());
+                }
+            }
+            else
+            {
+                uxCurUserAddrBox.Items.Add("None found");
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (UserSelected())
+            DialogResult result = uxSaveDB.ShowDialog();
+            if (result == DialogResult.OK)
             {
-                DialogResult result = uxSaveDB.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    mUserDB.Save(uxSaveDB.FileName);
-                }
+                mUserDB.Save(uxSaveDB.FileName);
             }
         }
 
@@ -141,11 +150,22 @@ namespace ProfileManagerTestView
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-            EditAddress lEditAddressForm = new EditAddress();
-            lEditAddressForm.mUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
-            lEditAddressForm.loadDisplay();
-            lEditAddressForm.ShowDialog();
-            UpdateDisplay();
+            if (UserSelected())
+            {
+                User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
+                if (lUser.LoggedIn)
+                {
+                    EditAddress lEditAddressForm = new EditAddress();
+                    lEditAddressForm.mUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
+                    lEditAddressForm.loadDisplay();
+                    lEditAddressForm.ShowDialog();
+                    UpdateDisplay();
+                }
+                else
+                {
+                    MessageBox.Show("User is not logged in");
+                }
+            }
         }
 
         /// <summary>
@@ -172,12 +192,20 @@ namespace ProfileManagerTestView
         {
             if (UserSelected())
             {
-                AddUser lAddUserForm = new AddUser();
-                lAddUserForm.mViewDBForm = this;
-                lAddUserForm.setMode("edit", mUserDB.FindUser(uxUserBox.SelectedItem.ToString()));
-                lAddUserForm.ShowDialog();
-                UpdateDisplay();
-            }
+                User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
+                if (lUser.LoggedIn)
+                {
+                    AddUser lAddUserForm = new AddUser();
+                    lAddUserForm.mViewDBForm = this;
+                    lAddUserForm.setMode("edit", mUserDB.FindUser(uxUserBox.SelectedItem.ToString()));
+                    lAddUserForm.ShowDialog();
+                    UpdateDisplay();
+                }
+                else
+                {
+                    MessageBox.Show("User is not logged in.");
+                }
+           }
         }
 
         /// <summary>
@@ -190,7 +218,14 @@ namespace ProfileManagerTestView
             if (UserSelected())
             {
                 User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
-                lUser.mLoggedIn = (Prompt.ShowDialog("Enter password for " + lUser.mUserName, "Enter password") == lUser.mPassword);
+                if(lUser.LoggedIn)
+                {
+                    lUser.Logout();
+                }
+                else
+                {
+                    lUser.LogIn((Prompt.ShowDialog("Enter password for " + lUser.UserName, "Enter password")));
+                }
                 LoadDisplay();
             }
         }
@@ -218,7 +253,7 @@ namespace ProfileManagerTestView
             if(UserSelected())
             {
                 User lUser = mUserDB.FindUser(uxUserBox.SelectedItem.ToString());
-                string response = lUser.RecoverPassword(Prompt.ShowDialog( lUser.mRecoveryQuestion,"Password recovery"));
+                string response = lUser.RecoverPassword(Prompt.ShowDialog( lUser.RecoveryQuestion,"Password recovery"));
                 if(response == string.Empty)
                 {
                     MessageBox.Show("That was the wrong recovery question answer.");

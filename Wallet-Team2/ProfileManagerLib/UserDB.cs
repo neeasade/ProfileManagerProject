@@ -11,7 +11,15 @@ namespace ProfileManagerLib
     {
 
         //List of Users loaded in the DB
-        public List<User> mUsers;
+        private List<User> mUsers;
+
+        /// <summary>
+        /// The list of Users  
+        /// </summary>
+        public List<User> Users
+        {
+            get { return mUsers; }
+        }
 
         /// <summary>
         /// Get a user who has the email in the parameter - Throws an exception if the user does not exist.
@@ -22,7 +30,7 @@ namespace ProfileManagerLib
         {
             for (int i=0; i< mUsers.Count; i++)
             {
-                if(mUsers[i].mEmail == aEmail)
+                if(mUsers[i].Email == aEmail)
                 {
                     return mUsers[i];
                 }
@@ -39,9 +47,9 @@ namespace ProfileManagerLib
         {
             for (int i =0;i< mUsers.Count;i++)
             {
-                if(mUsers[i].mEmail == aEmail)
+                if(mUsers[i].Email == aEmail)
                 {
-                    return mUsers[i].mUserName;
+                    return mUsers[i].UserName;
                 }
             }
             return "not found";
@@ -77,6 +85,7 @@ namespace ProfileManagerLib
                 lAddresses.Add(new Address(i.ToString(), "Oak St", "Manhattan","KS","66502",i.ToString().PadLeft(3,'0')));
                 lAddresses.Add(new Address(i.ToString(), "Acorn St", "Richmond","VA","69696",i.ToString().PadLeft(3,'0')));
                 User lUser = new User("Username" + i, "Full Name" + i, "Email" + i + "@botnet.com", "pass" + i, "Recovery question " + i + "?", "Recovery Answer " + i, "000-000-" + i.ToString().PadLeft(4, '0'), lAddresses);
+                lUser.LogIn("pass" + i);
                 mUsers.Add(lUser);
             }
         }

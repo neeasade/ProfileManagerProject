@@ -8,12 +8,45 @@ namespace ProfileManagerLib
 {
     public class Address
     {
-        public string mStreetNumber;
-        public string mZip;
-        public string mZipExt;
-        public string mStreet;
-        public string mCity;
-        public string mState;
+        private string mStreetNumber;
+        private string mZip;
+        private string mZipExt;
+        private string mStreet;
+        private string mCity;
+        private string mState;
+
+        public string StreetNumber
+        {
+            get { return mStreetNumber; }
+            set { mStreetNumber = value; }
+        }
+        public string Zip
+        {
+            get { return mZip; }
+            set { mZip = value; }
+        }
+        public string ZipExt
+        { 
+            get { return mZipExt; }
+            set { mZipExt = value; }
+        }
+        public string Street
+        {
+            get { return mStreet; }
+            set { mStreet = value; }
+        }
+        public string City
+        {
+            get { return mCity; }
+            set { mCity = value; }
+        }
+        public string State
+        {
+            get { return mState; }
+            set { mState= value; }
+        }
+
+ 
 
         /// <summary>
         /// Create a new addreess with values = to parameters. you may leave the aZipExt parameter as an empty string if there is no zip extension("")

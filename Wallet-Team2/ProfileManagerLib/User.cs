@@ -8,23 +8,105 @@ namespace ProfileManagerLib
 {
     public class User
     {
-        public string mName;
-        public string mUserName;
+        private string mName;
+        private string mUserName;
         private List<Address> mAddresses;
-        public string mEmail;
-        public string mPassword;
-        public string mRecoveryQuestion;
-        public string mRecoveryAnswer;
-        public string mPhoneNumber;
-        public bool mLoggedIn;
+        private string mEmail;
+        private string mPassword;
+        private string mRecoveryQuestion;
+        private string mRecoveryAnswer;
+        private string mPhoneNumber;
+        private bool mLoggedIn;
 
         /// <summary>
+        /// User Logged in status - set with Login() and Logout() functions.
+        /// </summary>
+        public bool LoggedIn
+        {
+            get { return mLoggedIn;  }
+        }
+
+        /// <summary>
+        /// User Full Name - User must be logged in to get or set value.
+        /// </summary>
+        public string Name
+        {
+            get { return (mLoggedIn ? mName : "Please login to get name."); }
+            set { if (mLoggedIn) {mName = value;} }           
+        }
+
+        /// <summary>
+        /// User Phone Number - User must be logged in to get or set value.
+        /// </summary>
+        public string PhoneNumber
+        {
+            get { return (mLoggedIn ? mPhoneNumber : "Please login to get phone number."); }
+            set { if (mLoggedIn) {mPhoneNumber = value;} }
+        }
+
+        /// <summary>
+        /// User Username - User must be logged in to set.
+        /// </summary>
+        public string UserName
+        {
+            get { return mUserName; }
+            set { if (mLoggedIn) { mUserName = value; } }
+        }
+
+        /// <summary>
+        /// User Email - User must be logged in to set.
+        /// </summary>
+        public string Email
+        {
+            get { return mEmail; }
+            set { if (mLoggedIn) { mEmail = value; } }
+        }
+
+        /// <summary>
+        /// User password - must be logged in to get value.
+        /// Set this value with the ChangePassword() function()
+        /// </summary>
+        public string Password
+        {
+            get {
+                return (mLoggedIn ? mPassword : "Please login to get password.");
+            }
+        }
+
+        /// <summary>
+        /// User Recovery question used to recover password - User must be logged in to set.
+        /// </summary>
+        public string RecoveryQuestion
+        {
+            get { return mRecoveryQuestion; }
+            set { if (mLoggedIn) { mRecoveryQuestion = value; } }
+        }
+
+        /// <summary>
+        /// User answer to their recovery question - must be logged in to set.
+        /// </summary>
+        public string RecoveryAnswer
+        {
+            get { return mRecoveryAnswer; }
+            set { if (mLoggedIn) { mRecoveryAnswer = value;} }
+        }
+ 
+        /// <summary>
         /// A Method to return the current list of current Addresses owned by the user, with the preferred Address in the first index.
+        /// Returns null if the user is not logged in.
         /// </summary>
         /// <returns></returns>
         public List<Address> getAddresses()
         {
-            return mAddresses;
+            return (!mLoggedIn || mAddresses.Count == 0 ? null : mAddresses);
+        }
+
+        /// <summary>
+        /// Log this user out.
+        /// </summary>
+        public void Logout()
+        {
+            mLoggedIn = false;
         }
 
         /// <summary>
@@ -32,11 +114,14 @@ namespace ProfileManagerLib
         /// </summary>
         public void ClearAddresses()
         {
-            mAddresses = new List<Address>();
+            if (mLoggedIn)
+            {
+                mAddresses = new List<Address>();
+            }
         }
 
         /// <summary>
-        /// Attempt to log this user in with a password. mLoggedIn will be set with the result of this.
+        /// Attempt to log this user in with a password. Returns true if successful.
         /// </summary>
         /// <param name="aPassword"></param>
         /// <returns>True if the logon is successful, false if otherwise</returns>
@@ -53,14 +138,17 @@ namespace ProfileManagerLib
         /// <param name="aAddressToAdd"></param>
         public void AddAddress(string aStreetNumber,string aStreetName, string aCity, string aState, string aZip, string aZipExt)
         {
-            if (mAddresses.Count == 5)
+            if (mLoggedIn)
             {
-                mAddresses.RemoveAt(4);
-                mAddresses.Add(new Address( aStreetNumber, aStreetName,  aCity,  aState,  aZip,  aZipExt));
-            }
-            else
-            {
-                mAddresses.Add(new Address( aStreetNumber, aStreetName,  aCity,  aState,  aZip,  aZipExt));
+                if (mAddresses.Count == 5)
+                {
+                    mAddresses.RemoveAt(4);
+                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip, aZipExt));
+                }
+                else
+                {
+                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip, aZipExt));
+                }
             }
         }
 
@@ -71,65 +159,74 @@ namespace ProfileManagerLib
         /// <param name="aAddressToAdd"></param>
         public void AddAddress(Address aAddressToAdd)
         {
-            if (mAddresses.Count == 5)
+            if (mLoggedIn)
             {
-                mAddresses.RemoveAt(4);
-                mAddresses.Add(aAddressToAdd);
-            }
-            else
-            {
-                mAddresses.Add(aAddressToAdd);
+                if (mAddresses.Count == 5)
+                {
+                    mAddresses.RemoveAt(4);
+                    mAddresses.Add(aAddressToAdd);
+                }
+                else
+                {
+                    mAddresses.Add(aAddressToAdd);
+                }
             }
         }
 
         /// <summary>
         /// Remove and existing user address based on a matching Address objects ToString() method.
-        /// Returns false if the Address is not found.
+        /// Returns false if the Address is not found, or the user is not logged in.
         /// </summary>
         /// <param name="aAddressToString"></param>
         public bool RemoveAddress(string aAddressToString)
         {
-            for (int i=0; i < mAddresses.Count; i++)
+            if (mLoggedIn)
             {
-                if(aAddressToString == mAddresses[i].ToString())
+                for (int i = 0; i < mAddresses.Count; i++)
                 {
-                    mAddresses.RemoveAt(i);
-                    return true;
+                    if (aAddressToString == mAddresses[i].ToString())
+                    {
+                        mAddresses.RemoveAt(i);
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
-
         /// <summary>
         /// Return the address object that represents the preferred shipping address.
+        /// If the User is not logged in, returns null.
         /// </summary>
         /// <returns></returns>
         public Address GetPreferredShippingAddress()
         {
-            return mAddresses[0];
+            return (mLoggedIn ? mAddresses[0] : null);
         }
 
         /// <summary>
         /// Set a preferred shipping address by calling it's ToString() method to pass as a parameter here.
-        /// Returns false if the address was not found in this user.
+        /// Returns false if the address was not found in this user, or if the user is not logged in.
         /// </summary>
         public bool SetPreferredShippingAddressByString(string aAddressString)
         {
-            if(mAddresses[0].ToString() == aAddressString)
+            if (mLoggedIn)
             {
-                return true;
-            }
-
-            for (int i=0; i < mAddresses.Count; i++)
-            {
-                if(aAddressString == mAddresses[i].ToString())
+                if (mAddresses[0].ToString() == aAddressString)
                 {
-                    //swap them
-                    Address tmp = mAddresses[0];
-                    mAddresses[0] = mAddresses[i];
-                    mAddresses[i] = tmp;
                     return true;
+                }
+
+                for (int i = 0; i < mAddresses.Count; i++)
+                {
+                    if (aAddressString == mAddresses[i].ToString())
+                    {
+                        //swap them
+                        Address tmp = mAddresses[0];
+                        mAddresses[0] = mAddresses[i];
+                        mAddresses[i] = tmp;
+                        return true;
+                    }
                 }
             }
             return false;
@@ -149,18 +246,23 @@ namespace ProfileManagerLib
              mRecoveryAnswer = aRecoveryAnswer;
              mPhoneNumber = aPhoneNumber;
              mAddresses = aAddressList;
+             mLoggedIn = false;
        }
 
         /// <summary>
-        /// Change a users password, based on entered current password and a desired new password
+        /// Change a users password, based on entered current password and a desired new password.
         /// </summary>
         /// <param name="aCurPassword"></param>
         /// <param name="aNewPassword"></param>
-        /// <returns>False if aCurPassword is not the current password</returns>
+        /// <returns>False if aCurPassword is not the current password, or user is not logged in.</returns>
         public bool ChangePassword(String aCurPassword, string aNewPassword)
         {
-            mPassword = (aCurPassword == mPassword ? aNewPassword : mPassword);
-            return (aNewPassword == mPassword);
+            if (mLoggedIn)
+            {
+                mPassword = (aCurPassword == mPassword ? aNewPassword : mPassword);
+                return (aNewPassword == mPassword);
+            }
+            return false;
         }
 
         /// <summary>
@@ -185,12 +287,11 @@ namespace ProfileManagerLib
         /// <returns></returns>
         public override string ToString()
         {
-            return mUserName + "\n" +
-                   mEmail + "\n" +
-                   mName + "\n" +
-                   mPhoneNumber + "\n" +
-                   "Preferred shipping address:\n" +
-                   (mAddresses.Count > 0 ? mAddresses[0].ToString() : "none found");
+            return UserName + "\n" +
+                   Email + "\n" +
+                   Name + "\n" +
+                   PhoneNumber + "\n" +
+                   (LoggedIn ? "Preferred shipping address:\n" + (mAddresses.Count > 0 ? mAddresses[0].ToString() : "none found") : "");
         }
 
         /// <summary>

@@ -26,56 +26,56 @@ namespace ProfileManagerTestView
             {
                 uxPreferred1.Checked = true;
                 lAddress = lUserAddresses[0];
-                uxStreetNum1.Text = lAddress.mStreetNumber;
-                uxStreetName1.Text = lAddress.mStreet;
-                uxCityName1.Text = lAddress.mCity;
-                uxState1.Text = lAddress.mState;
-                uxZip1.Text = lAddress.mZip;
-                uxZipExt1.Text = lAddress.mZipExt;
+                uxStreetNum1.Text = lAddress.StreetNumber;
+                uxStreetName1.Text = lAddress.Street;
+                uxCityName1.Text = lAddress.City;
+                uxState1.Text = lAddress.State;
+                uxZip1.Text = lAddress.Zip;
+                uxZipExt1.Text = lAddress.ZipExt;
             }
 
             if(lUserAddresses.Count >= 2)
             {
                 lAddress = lUserAddresses[1];
-                uxStreetNum2.Text = lAddress.mStreetNumber;
-                uxStreetName2.Text = lAddress.mStreet;
-                uxCityName2.Text = lAddress.mCity;
-                uxStateName2.Text = lAddress.mState;
-                uxZip2.Text = lAddress.mZip;
-                uxZipExt2.Text = lAddress.mZipExt;
+                uxStreetNum2.Text = lAddress.StreetNumber;
+                uxStreetName2.Text = lAddress.Street;
+                uxCityName2.Text = lAddress.City;
+                uxStateName2.Text = lAddress.State;
+                uxZip2.Text = lAddress.Zip;
+                uxZipExt2.Text = lAddress.ZipExt;
             }
 
             if(lUserAddresses.Count >= 3)
             {
                 lAddress = lUserAddresses[2];
-                uxStreetNum3.Text = lAddress.mStreetNumber;
-                uxStreetName3.Text = lAddress.mStreet;
-                uxCityName3.Text = lAddress.mCity;
-                uxStateName3.Text = lAddress.mState;
-                uxZip3.Text = lAddress.mZip;
-                uxZipExt3.Text = lAddress.mZipExt;
+                uxStreetNum3.Text = lAddress.StreetNumber;
+                uxStreetName3.Text = lAddress.Street;
+                uxCityName3.Text = lAddress.City;
+                uxStateName3.Text = lAddress.State;
+                uxZip3.Text = lAddress.Zip;
+                uxZipExt3.Text = lAddress.ZipExt;
             }
 
             if(lUserAddresses.Count >= 4)
             {
                 lAddress = lUserAddresses[3];
-                uxStreetNum4.Text = lAddress.mStreetNumber;
-                uxStreetName4.Text = lAddress.mStreet;
-                uxCityName4.Text = lAddress.mCity;
-                uxStateName4.Text = lAddress.mState;
-                uxZip4.Text = lAddress.mZip;
-                uxZipExt4.Text = lAddress.mZipExt;
+                uxStreetNum4.Text = lAddress.StreetNumber;
+                uxStreetName4.Text = lAddress.Street;
+                uxCityName4.Text = lAddress.City;
+                uxStateName4.Text = lAddress.State;
+                uxZip4.Text = lAddress.Zip;
+                uxZipExt4.Text = lAddress.ZipExt;
             }
 
             if(lUserAddresses.Count >= 5)
             {
                 lAddress = lUserAddresses[4];
-                uxStreetNum5.Text = lAddress.mStreetNumber;
-                uxStreetName5.Text = lAddress.mStreet;
-                uxCityName5.Text = lAddress.mCity;
-                uxStateName5.Text = lAddress.mState;
-                uxZip5.Text = lAddress.mZip;
-                uxZipExt5.Text = lAddress.mZipExt;
+                uxStreetNum5.Text = lAddress.StreetNumber;
+                uxStreetName5.Text = lAddress.Street;
+                uxCityName5.Text = lAddress.City;
+                uxStateName5.Text = lAddress.State;
+                uxZip5.Text = lAddress.Zip;
+                uxZipExt5.Text = lAddress.ZipExt;
             }
         }
 

@@ -21,12 +21,12 @@ namespace ProfileManagerTestView
             mMode = aMode;
             if (mMode == "edit" && aUser != null)
             {
-                uxName.Text = aUser.mName;
-                uxEmail.Text = aUser.mEmail;
-                uxUsername.Text = aUser.mUserName;
-                uxRecoveryQuestion.Text = aUser.mRecoveryQuestion;
-                uxRecoveryAnswer.Text = aUser.mRecoveryAnswer;
-                uxPhoneNumber.Text = aUser.mPhoneNumber;
+                uxName.Text = aUser.Name;
+                uxEmail.Text = aUser.Email;
+                uxUsername.Text = aUser.UserName;
+                uxRecoveryQuestion.Text = aUser.RecoveryQuestion;
+                uxRecoveryAnswer.Text = aUser.RecoveryAnswer;
+                uxPhoneNumber.Text = aUser.PhoneNumber;
                 uxEmail.Enabled = false;
                 uxPassword.Enabled = false;
                 uxConfirmPassword.Enabled = false;
@@ -59,11 +59,11 @@ namespace ProfileManagerTestView
             {
                 //editing an existing user
                 User lUser = mViewDBForm.mUserDB.FindUser(uxEmail.Text);
-                lUser.mName = uxName.Text;
-                lUser.mUserName = uxUsername.Text;
-                lUser.mPhoneNumber = uxPhoneNumber.Text;
-                lUser.mRecoveryAnswer = uxRecoveryAnswer.Text;
-                lUser.mRecoveryQuestion = uxRecoveryQuestion.Text;
+                lUser.Name = uxName.Text;
+                lUser.UserName = uxUsername.Text;
+                lUser.PhoneNumber = uxPhoneNumber.Text;
+                lUser.RecoveryAnswer = uxRecoveryAnswer.Text;
+                lUser.RecoveryQuestion = uxRecoveryQuestion.Text;
                 this.Close();
             }
             else if (mMode == "add")
