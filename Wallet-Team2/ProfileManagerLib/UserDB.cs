@@ -14,18 +14,39 @@ namespace ProfileManagerLib
         private List<User> mUsers;
 
         /// <summary>
-        /// The list of Users  
+        /// Determine if an Email Conflicts with an existing User.
         /// </summary>
-        public List<User> Users
+        /// <param name="aEmail"></param>
+        public bool DoesEmailConflict(string aEmail)
         {
-            get { return mUsers; }
+            for (int i=0; i< mUsers.Count; i++)
+            {
+                if(mUsers[i].Email == aEmail)
+                    return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determine if a Username conflicts with an existing user.
+        /// </summary>
+        /// <param name="aUsername"></param>
+        /// <returns></returns>
+        public bool DoesUsernameConflict(string aUsername)
+        {
+            for (int i=0; i< mUsers.Count; i++)
+            {
+                if(mUsers[i].UserName == aUsername)
+                    return true;
+            }
+            return false;
         }
 
         /// <summary>
         /// Get a user who has the email in the parameter - Throws an exception if the user does not exist.
         /// </summary>
         /// <param name="aUserName"></param>
-        /// <returns>Returns the matching user, or throws an exception if the user does not exist.</returns>
+        /// <returns>Returns the matching user, or returns null if the User does not exist.</returns>
         public User FindUser(string aEmail)
         {
             for (int i=0; i< mUsers.Count; i++)
@@ -35,7 +56,7 @@ namespace ProfileManagerLib
                     return mUsers[i];
                 }
             }
-            throw new Exception("User Not Found");
+            return null;
         }
 
         /// <summary>
@@ -50,6 +71,23 @@ namespace ProfileManagerLib
                 if(mUsers[i].Email == aEmail)
                 {
                     return mUsers[i].UserName;
+                }
+            }
+            return "not found";
+        }
+
+        /// <summary>
+        /// Find the Email associated with a Username
+        /// </summary>
+        /// <param name="aUsername"></param>
+        /// <returns></returns>
+        public string FindEmail(string aUsername)
+        {
+            for (int i =0;i< mUsers.Count;i++)
+            {
+                if(mUsers[i].UserName == aUsername)
+                {
+                    return mUsers[i].Email;
                 }
             }
             return "not found";
@@ -123,6 +161,22 @@ namespace ProfileManagerLib
                 }
                 //add the new user to the User DB list
                 mUsers.Add(new User(lUserInfo[0], lUserInfo[1], lUserInfo[2], lUserInfo[3], lUserInfo[4], lUserInfo[5], lUserInfo[6], lUserAddresses));
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="aEmail"></param>
+        public void DeleteUser(string aEmail)
+        {
+            for(int i=0;i<mUsers.Count;i++)
+            {
+                if(mUsers[i].Email == aEmail)
+                {
+                    mUsers.RemoveAt(i);
+                    return;
+                }
             }
         }
 
