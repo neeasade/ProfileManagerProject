@@ -74,7 +74,7 @@ namespace ProfileManagerTestView
            //populate the logged in logged out statuses
            uxLoggedIn.Text = "LoggedIn: ";
            uxLoggedOut.Text = "LoggedOut: ";
-           for (int i = 0; i < mProfileController.NumberOfUsers; i++ )
+           for (int i = 0; i < mProfileController.NumberOfUsers(); i++ )
            {
                string lUserEmail = mProfileController.FindEmail(i);
                uxUserBox.Items.Add(lUserEmail);
@@ -97,7 +97,7 @@ namespace ProfileManagerTestView
 
         private void UpdateDisplay()
         {
-            //get current User selected(listbox 'items' are strings:
+            //get current User selected(listbox 'items' are strings):
             mSelectedUserEmail = uxUserBox.SelectedItem.ToString();
 
             //populate the middle box with that Users info(clear it first):

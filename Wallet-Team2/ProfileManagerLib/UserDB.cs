@@ -10,7 +10,21 @@ namespace ProfileManagerLib
     internal class UserDB
     {
         //List of Users loaded in the DB
-        public List<User> mUsers;
+        private List<User> mUsers;
+
+        public int NumberOfUsers
+        {
+            get { return mUsers.Count; }
+        }
+
+        /// <summary>
+        /// Get the email of a user by their index in the database. 
+        /// </summary>
+        /// <param name="aIndex"></param>
+        public string FindEmailAtIndex(int aIndex)
+        {
+            return (mUsers.Count > aIndex ? mUsers[aIndex].Email : null);
+        }
 
         /// <summary>
         /// Determine if an Email Conflicts with an existing User.
@@ -93,12 +107,17 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
-        /// Add a new user to the database
+        /// Add a new user to the database. Fails if there is a conflicting Username or email.
         /// </summary>
         /// <param name="aNewUser"></param>
-        public void AddUser(User aNewUser)
+        public bool AddUser(User aNewUser)
         {
-            mUsers.Add(aNewUser);
+            if(!EmailConflicts(aNewUser.Email) && !UsernameConflicts(aNewUser.UserName))
+            {
+                mUsers.Add(aNewUser);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

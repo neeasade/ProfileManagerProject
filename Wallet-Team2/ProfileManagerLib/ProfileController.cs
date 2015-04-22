@@ -30,33 +30,36 @@ namespace ProfileManagerLib
 
     public class ProfileController
     {
-        UserDB mUserDB;
+        private UserDB mUserDB;
 
-        public int NumberOfUsers
+
+        //---------------------------------------- Constructors ---------------------------------------
+
+        /// <summary>
+        /// Make a new  ProfileController with an empty User database
+        /// </summary>
+        public ProfileController()
         {
-            get { return mUserDB.mUsers.Count; }
+            mUserDB = new UserDB();
         }
 
         /// <summary>
-        /// Get the number of addresses that a user has.
+        /// Make a new ProfileControllers who's database gets populated with an amount of 'dummy' users, determined by the parameter.
         /// </summary>
-        /// <param name="aEmail"></param>
-        /// <returns></returns>
-        public int GetUserAddressCount(string aEmail)
+        public ProfileController(int aFakeUserCount)
         {
-            return mUserDB.FindUser(aEmail).getAddresses().Count;
+            mUserDB = new UserDB(aFakeUserCount);
         }
 
         /// <summary>
-        /// Set a users preferred address by that addresses ToString() value.
+        /// Make a new ProfileController who's data is determined by loading in a text file, determined by parameter.
         /// </summary>
-        /// <param name="aEmail"></param>
-        /// <param name="aAddressToString"></param>
-        public void SetUserPreferredAddressByString(string aEmail, string aAddressToString)
+        public ProfileController(string aDBlocation)
         {
-            mUserDB.FindUser(aEmail).SetPreferredShippingAddressByString(aAddressToString);
+            mUserDB = new UserDB(aDBlocation);
         }
 
+        //---------------------------------------- Get and set User and Address Values -----------------------------------
         /// <summary>
         /// Get a user address value from a users address by index(1-5)
         /// Returns null if Address Index doesn't exist.
@@ -123,31 +126,6 @@ namespace ProfileManagerLib
             return true;
         }
 
-
-        /// <summary>
-        /// Make a new  ProfileController with an empty User database
-        /// </summary>
-        public ProfileController()
-        {
-            mUserDB = new UserDB();
-        }
-
-        /// <summary>
-        /// Make a new ProfileControllers who's database gets populated with an amount of 'dummy' users, determined by the parameter.
-        /// </summary>
-        public ProfileController(int aFakeUserCount)
-        {
-            mUserDB = new UserDB(aFakeUserCount);
-        }
-
-        /// <summary>
-        /// Make a new ProfileController who's data is determined by loading in a text file, determined by parameter.
-        /// </summary>
-        public ProfileController(string aDBlocation)
-        {
-            mUserDB = new UserDB(aDBlocation);
-        }
-
         /// <summary>
         /// Get a value from a User who's email matches the aEmail parameter. The second parameter to this function is an enum that determines what thing to get.
         /// Please be aware if the user is not logged in many of these are considered off limits.
@@ -212,6 +190,35 @@ namespace ProfileManagerLib
             //If we get here, User was logged in and we set the value.
             return true;
         }
+        //---------------------------------------- UserDB Wrappers -----------------------------------
+
+        /// <summary>
+        /// This is not a wrapp
+        /// </summary>
+        public int NumberOfUsers()
+        {
+            return mUserDB.NumberOfUsers;
+        }
+
+        /// <summary>
+        /// Get the number of addresses that a user has.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <returns></returns>
+        public int GetUserAddressCount(string aEmail)
+        {
+            return mUserDB.FindUser(aEmail).getAddresses().Count;
+        }
+
+        /// <summary>
+        /// Set a users preferred address by that addresses ToString() value.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <param name="aAddressToString"></param>
+        public void SetUserPreferredAddressByString(string aEmail, string aAddressToString)
+        {
+            mUserDB.FindUser(aEmail).SetPreferredShippingAddressByString(aAddressToString);
+        }
 
         /// <summary>
         /// Attempt to change a password, with a current password and new desired password.
@@ -249,7 +256,6 @@ namespace ProfileManagerLib
             mUserDB.FindUser(aEmail).Logout();
         }
 
-
         /// <summary>
         /// Get an email associated with an username.
         /// </summary>
@@ -265,7 +271,7 @@ namespace ProfileManagerLib
         /// <returns></returns>
         public string FindEmail(int aUserIndex)
         {
-            return mUserDB.mUsers[aUserIndex].Email;
+            return mUserDB.FindEmailAtIndex(aUserIndex);
         }
 
         /// <summary>
@@ -275,12 +281,7 @@ namespace ProfileManagerLib
         /// </summary>
         public bool AddUser(string aUsername, string aName, string aEmail, string aPassword, string aRecoveryQuestion, string aRecoveryAnswer, string aPhoneNumber)
         {
-            if(!mUserDB.EmailConflicts(aEmail) && !mUserDB.UsernameConflicts(aUsername))
-            {
-                mUserDB.AddUser(new User(aUsername, aName, aEmail,aPassword,aRecoveryQuestion,aRecoveryAnswer, aPhoneNumber, new List<Address>()));
-                return true;
-            }
-            return false;
+                return mUserDB.AddUser(new User(aUsername, aName, aEmail,aPassword,aRecoveryQuestion,aRecoveryAnswer, aPhoneNumber, new List<Address>()));
         }
 
         /// <summary>
@@ -293,7 +294,7 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
-        /// Get User's preferred shipping address.
+        /// Get User's preferred shipping address string.
         /// </summary>
         /// <param name="aEmail"></param>
         /// <returns></returns>

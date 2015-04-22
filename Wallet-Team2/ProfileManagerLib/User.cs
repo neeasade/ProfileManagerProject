@@ -143,33 +143,8 @@ namespace ProfileManagerLib
                 if (mAddresses.Count == 5)
                 {
                     mAddresses.RemoveAt(4);
-                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip));
                 }
-                else
-                {
-                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip));
-                }
-            }
-        }
-
-        /// <summary>
-        /// Add a new address object to the list of addresses.
-        /// If there are 5 existing addresses for this user, the last on the list will be removed.
-        /// </summary>
-        /// <param name="aAddressToAdd"></param>
-        public void AddAddress(Address aAddressToAdd)
-        {
-            if (mLoggedIn)
-            {
-                if (mAddresses.Count == 5)
-                {
-                    mAddresses.RemoveAt(4);
-                    mAddresses.Add(aAddressToAdd);
-                }
-                else
-                {
-                    mAddresses.Add(aAddressToAdd);
-                }
+                mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip));
             }
         }
 
@@ -217,15 +192,18 @@ namespace ProfileManagerLib
                     return true;
                 }
 
-                for (int i = 0; i < mAddresses.Count; i++)
+                if (mAddresses.Count > 1)
                 {
-                    if (aAddressString == mAddresses[i].ToString())
+                    for (int i = 1; i < mAddresses.Count; i++)
                     {
-                        //swap them
-                        Address tmp = mAddresses[0];
-                        mAddresses[0] = mAddresses[i];
-                        mAddresses[i] = tmp;
-                        return true;
+                        if (aAddressString == mAddresses[i].ToString())
+                        {
+                            //swap them
+                            Address tmp = mAddresses[0];
+                            mAddresses[0] = mAddresses[i];
+                            mAddresses[i] = tmp;
+                            return true;
+                        }
                     }
                 }
             }

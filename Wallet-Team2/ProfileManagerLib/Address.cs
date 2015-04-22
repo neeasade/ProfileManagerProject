@@ -58,7 +58,7 @@ namespace ProfileManagerLib
 
         /// <summary>
         /// Returns the content of the address, in the following example form:
-        /// 123 Oak St, Manhattan, KS 66502 4234
+        /// 123 Oak St, Manhattan, KS 66502
         /// </summary>
         /// <returns></returns>
         public override string ToString()
