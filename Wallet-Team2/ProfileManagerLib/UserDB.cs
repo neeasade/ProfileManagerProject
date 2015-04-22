@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    public class UserDB
+    internal class UserDB
     {
-
         //List of Users loaded in the DB
-        private List<User> mUsers;
+        public List<User> mUsers;
 
         /// <summary>
         /// Determine if an Email Conflicts with an existing User.
         /// </summary>
         /// <param name="aEmail"></param>
-        public bool DoesEmailConflict(string aEmail)
+        public bool EmailConflicts(string aEmail)
         {
             for (int i=0; i< mUsers.Count; i++)
             {
@@ -32,7 +31,7 @@ namespace ProfileManagerLib
         /// </summary>
         /// <param name="aUsername"></param>
         /// <returns></returns>
-        public bool DoesUsernameConflict(string aUsername)
+        public bool UsernameConflicts(string aUsername)
         {
             for (int i=0; i< mUsers.Count; i++)
             {
@@ -120,8 +119,8 @@ namespace ProfileManagerLib
             for(int i=0; i<aSeedNum;i++)
             {
                 List<Address> lAddresses = new List<Address>();
-                lAddresses.Add(new Address(i.ToString(), "Oak St", "Manhattan","KS","66502",i.ToString().PadLeft(3,'0')));
-                lAddresses.Add(new Address(i.ToString(), "Acorn St", "Richmond","VA","69696",i.ToString().PadLeft(3,'0')));
+                lAddresses.Add(new Address(i.ToString(), "Oak St", "Manhattan","KS","66502"));
+                lAddresses.Add(new Address(i.ToString(), "Acorn St", "Richmond","VA","69696"));
                 User lUser = new User("Username" + i, "Full Name" + i, "Email" + i + "@botnet.com", "pass" + i, "Recovery question " + i + "?", "Recovery Answer " + i, "000-000-" + i.ToString().PadLeft(4, '0'), lAddresses);
                 lUser.LogIn("pass" + i);
                 mUsers.Add(lUser);
@@ -156,7 +155,7 @@ namespace ProfileManagerLib
                     for (int j=0; j < lUserDBAddresses.Length; j++)
                     {
                         string[] lAddrInfo = lUserDBAddresses[j].Split('+');
-                        lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4], lAddrInfo[5]));
+                        lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4]));
                     }
                 }
                 //add the new user to the User DB list

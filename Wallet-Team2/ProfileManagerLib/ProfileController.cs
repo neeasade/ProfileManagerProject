@@ -6,29 +6,123 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    class ProfileController
+    public enum UserProperty
     {
-        public enum UserProperty
-        {
-            Name,
-            PhoneNumber,
-            UserName,
-            Email,
-            Password,
-            RecoveryQuestion,
-            RecoveryAnswer
-        };
+        Name,
+        PhoneNumber,
+        Username,
+        Email,
+        Password,
+        RecoveryQuestion,
+        RecoveryAnswer,
+        ToString
+    };
 
-        public enum AddressProperty
-        {
-            StreetNumber,
-            StreetName,
-            City,
-            State,
-            Zip
-        };
+    public enum AddressProperty
+    {
+        StreetNumber,
+        StreetName,
+        City,
+        State,
+        Zip,
+        ToString
+    };
 
+    public class ProfileController
+    {
         UserDB mUserDB;
+
+        public int NumberOfUsers
+        {
+            get { return mUserDB.mUsers.Count; }
+        }
+
+        /// <summary>
+        /// Get the number of addresses that a user has.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <returns></returns>
+        public int GetUserAddressCount(string aEmail)
+        {
+            return mUserDB.FindUser(aEmail).getAddresses().Count;
+        }
+
+        /// <summary>
+        /// Set a users preferred address by that addresses ToString() value.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <param name="aAddressToString"></param>
+        public void SetUserPreferredAddressByString(string aEmail, string aAddressToString)
+        {
+            mUserDB.FindUser(aEmail).SetPreferredShippingAddressByString(aAddressToString);
+        }
+
+        /// <summary>
+        /// Get a user address value from a users address by index(1-5)
+        /// Returns null if Address Index doesn't exist.
+        /// </summary>
+        /// <param name="aEmail">Email to identify user.</param>
+        /// <param name="aAddressIndex">Index of Address belonging to user to get AddressProperty from.</param>
+        /// <param name="aAddressProperty">The part of the address to get.</param>
+        /// <returns></returns>
+        public string GetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty)
+        {
+            User lUser = mUserDB.FindUser(aEmail);
+            if(lUser.getAddresses() == null || lUser.getAddresses().Count < aAddressIndex)
+            {
+                return null;
+            }
+
+            Address lAddress = lUser.getAddresses()[--aAddressIndex];
+
+            switch(aAddressProperty)
+            {
+                case AddressProperty.StreetNumber: return lAddress.StreetNumber;
+                case AddressProperty.StreetName: return lAddress.Street;
+                case AddressProperty.City: return lAddress.City;
+                case AddressProperty.State: return lAddress.State;
+                case AddressProperty.Zip: return lAddress.Zip;
+                case AddressProperty.ToString: return lAddress.ToString();
+            }
+
+            //shouldn't get here:
+            return null;
+        }
+
+        /// <summary>
+        /// Set an Address value on an address that a User has, identified by Address index(1-5)
+        /// returns false if a nonexistent index was specified or the user was logged out.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <param name="aAddressIndex"></param>
+        /// <param name="aAddressProperty"></param>
+        /// <returns></returns>
+        public bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue)
+        {
+            User lUser = mUserDB.FindUser(aEmail);
+            if(lUser.getAddresses().Count < aAddressIndex || !lUser.LoggedIn)
+            {
+                return false;
+            }
+
+            Address lAddress = lUser.getAddresses()[--aAddressIndex];
+
+            switch(aAddressProperty)
+            {
+                case AddressProperty.StreetNumber:
+                    lAddress.StreetNumber = aAddressPropertyValue; break;
+                case AddressProperty.StreetName: 
+                    lAddress.Street = aAddressPropertyValue; break;
+                case AddressProperty.City: 
+                    lAddress.City = aAddressPropertyValue; break;
+                case AddressProperty.State: 
+                    lAddress.State = aAddressPropertyValue; break;
+                case AddressProperty.Zip: 
+                    lAddress.Zip = aAddressPropertyValue; break;
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// Make a new  ProfileController with an empty User database
@@ -69,7 +163,7 @@ namespace ProfileManagerLib
                     return lUser.Name;
                 case UserProperty.PhoneNumber:
                     return lUser.PhoneNumber;
-                case UserProperty.UserName:
+                case UserProperty.Username:
                     return lUser.UserName;
                 case UserProperty.Email:
                     return lUser.Email;
@@ -79,6 +173,8 @@ namespace ProfileManagerLib
                     return lUser.RecoveryQuestion;
                 case UserProperty.RecoveryAnswer:
                     return lUser.RecoveryAnswer;
+                case UserProperty.ToString:
+                    return lUser.ToString();
             }
             return "No matching case for value found.";
         }
@@ -104,7 +200,7 @@ namespace ProfileManagerLib
                     lUser.Name = aUserValue; break;
                 case UserProperty.PhoneNumber:
                     lUser.PhoneNumber = aUserValue; break;
-                case UserProperty.UserName:
+                case UserProperty.Username:
                     lUser.UserName = aUserValue; break;
                 case UserProperty.Email:
                     lUser.Email = aUserValue; break;
@@ -145,11 +241,31 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
-        /// Get a Username associated with an email.
+        /// Log a user with a matching email out.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        public void LogUserOut(string aEmail)
+        {
+            mUserDB.FindUser(aEmail).Logout();
+        }
+
+
+        /// <summary>
+        /// Get an email associated with an username.
         /// </summary>
         public string FindEmail(string aUsername)
         {
             return mUserDB.FindEmail(aUsername);
+        }
+
+        /// <summary>
+        /// Get the email of a user at an index.
+        /// </summary>
+        /// <param name="aUserIndex"></param>
+        /// <returns></returns>
+        public string FindEmail(int aUserIndex)
+        {
+            return mUserDB.mUsers[aUserIndex].Email;
         }
 
         /// <summary>
@@ -159,9 +275,9 @@ namespace ProfileManagerLib
         /// </summary>
         public bool AddUser(string aUsername, string aName, string aEmail, string aPassword, string aRecoveryQuestion, string aRecoveryAnswer, string aPhoneNumber)
         {
-            if(!mUserDB.DoesEmailConflict(aEmail) && !mUserDB.DoesUsernameConflict(aUsername))
+            if(!mUserDB.EmailConflicts(aEmail) && !mUserDB.UsernameConflicts(aUsername))
             {
-                mUserDB.AddUser(new User(aUsername, aName, aEmail,aPassword,aRecoveryQuestion,aRecoveryAnswer, aPhoneNumber, new List<Address>());
+                mUserDB.AddUser(new User(aUsername, aName, aEmail,aPassword,aRecoveryQuestion,aRecoveryAnswer, aPhoneNumber, new List<Address>()));
                 return true;
             }
             return false;
@@ -173,7 +289,7 @@ namespace ProfileManagerLib
         /// </summary>
         public void AddAddressToUser(string aEmail, string aStreetNumber, string aStreetName, string aCity, string aState, string aZip)
         {
-            mUserDB.FindUser(aEmail).AddAddress(aStreetNumber, aStreetName, aCity, aState, aZip, ""); 
+            mUserDB.FindUser(aEmail).AddAddress(aStreetNumber, aStreetName, aCity, aState, aZip);
         }
 
         /// <summary>
@@ -187,6 +303,16 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
+        /// Clear all of a users addresses.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <returns></returns>
+        public void ClearUserAddresses(string aEmail)
+        {
+            mUserDB.FindUser(aEmail).ClearAddresses();
+        }
+
+        /// <summary>
         /// Delete a user.
         /// </summary>
         /// <param name="aEmail"></param>
@@ -194,6 +320,17 @@ namespace ProfileManagerLib
         public void DeleteUser(string aEmail)
         {
             mUserDB.DeleteUser(aEmail);
+        }
+
+        /// <summary>
+        /// Attempt to recover a users password - returns null on failure.
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <param name="aRecoveryAnswer"></param>
+        /// <returns></returns>
+        public string RecoverPassword(string aEmail, string aRecoveryAnswer)
+        {
+            return mUserDB.FindUser(aEmail).RecoverPassword(aRecoveryAnswer);
         }
 
         /// <summary>

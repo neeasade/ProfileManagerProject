@@ -33,38 +33,32 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.uxStreetNum1 = new System.Windows.Forms.TextBox();
             this.uxStreetName1 = new System.Windows.Forms.TextBox();
             this.uxCityName1 = new System.Windows.Forms.TextBox();
             this.uxState1 = new System.Windows.Forms.TextBox();
             this.uxZip1 = new System.Windows.Forms.TextBox();
-            this.uxZipExt1 = new System.Windows.Forms.TextBox();
             this.uxPreferred1 = new System.Windows.Forms.RadioButton();
             this.uxPreferred2 = new System.Windows.Forms.RadioButton();
-            this.uxZipExt2 = new System.Windows.Forms.TextBox();
             this.uxZip2 = new System.Windows.Forms.TextBox();
             this.uxStateName2 = new System.Windows.Forms.TextBox();
             this.uxCityName2 = new System.Windows.Forms.TextBox();
             this.uxStreetName2 = new System.Windows.Forms.TextBox();
             this.uxStreetNum2 = new System.Windows.Forms.TextBox();
             this.uxPreferred3 = new System.Windows.Forms.RadioButton();
-            this.uxZipExt3 = new System.Windows.Forms.TextBox();
             this.uxZip3 = new System.Windows.Forms.TextBox();
             this.uxStateName3 = new System.Windows.Forms.TextBox();
             this.uxCityName3 = new System.Windows.Forms.TextBox();
             this.uxStreetName3 = new System.Windows.Forms.TextBox();
             this.uxStreetNum3 = new System.Windows.Forms.TextBox();
             this.uxPreferred4 = new System.Windows.Forms.RadioButton();
-            this.uxZipExt4 = new System.Windows.Forms.TextBox();
             this.uxZip4 = new System.Windows.Forms.TextBox();
             this.uxStateName4 = new System.Windows.Forms.TextBox();
             this.uxCityName4 = new System.Windows.Forms.TextBox();
             this.uxStreetName4 = new System.Windows.Forms.TextBox();
             this.uxStreetNum4 = new System.Windows.Forms.TextBox();
             this.uxPreferred5 = new System.Windows.Forms.RadioButton();
-            this.uxZipExt5 = new System.Windows.Forms.TextBox();
             this.uxZip5 = new System.Windows.Forms.TextBox();
             this.uxStateName5 = new System.Windows.Forms.TextBox();
             this.uxCityName5 = new System.Windows.Forms.TextBox();
@@ -118,19 +112,10 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "State";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(428, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Zip Extension";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(516, 24);
+            this.label7.Location = new System.Drawing.Point(431, 24);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(50, 13);
             this.label7.TabIndex = 6;
@@ -171,17 +156,10 @@
             this.uxZip1.Size = new System.Drawing.Size(70, 20);
             this.uxZip1.TabIndex = 11;
             // 
-            // uxZipExt1
-            // 
-            this.uxZipExt1.Location = new System.Drawing.Point(431, 49);
-            this.uxZipExt1.Name = "uxZipExt1";
-            this.uxZipExt1.Size = new System.Drawing.Size(68, 20);
-            this.uxZipExt1.TabIndex = 12;
-            // 
             // uxPreferred1
             // 
             this.uxPreferred1.AutoSize = true;
-            this.uxPreferred1.Location = new System.Drawing.Point(528, 52);
+            this.uxPreferred1.Location = new System.Drawing.Point(443, 52);
             this.uxPreferred1.Name = "uxPreferred1";
             this.uxPreferred1.Size = new System.Drawing.Size(14, 13);
             this.uxPreferred1.TabIndex = 13;
@@ -191,19 +169,12 @@
             // uxPreferred2
             // 
             this.uxPreferred2.AutoSize = true;
-            this.uxPreferred2.Location = new System.Drawing.Point(528, 78);
+            this.uxPreferred2.Location = new System.Drawing.Point(443, 78);
             this.uxPreferred2.Name = "uxPreferred2";
             this.uxPreferred2.Size = new System.Drawing.Size(14, 13);
             this.uxPreferred2.TabIndex = 20;
             this.uxPreferred2.TabStop = true;
             this.uxPreferred2.UseVisualStyleBackColor = true;
-            // 
-            // uxZipExt2
-            // 
-            this.uxZipExt2.Location = new System.Drawing.Point(431, 75);
-            this.uxZipExt2.Name = "uxZipExt2";
-            this.uxZipExt2.Size = new System.Drawing.Size(68, 20);
-            this.uxZipExt2.TabIndex = 19;
             // 
             // uxZip2
             // 
@@ -243,19 +214,12 @@
             // uxPreferred3
             // 
             this.uxPreferred3.AutoSize = true;
-            this.uxPreferred3.Location = new System.Drawing.Point(528, 104);
+            this.uxPreferred3.Location = new System.Drawing.Point(443, 104);
             this.uxPreferred3.Name = "uxPreferred3";
             this.uxPreferred3.Size = new System.Drawing.Size(14, 13);
             this.uxPreferred3.TabIndex = 27;
             this.uxPreferred3.TabStop = true;
             this.uxPreferred3.UseVisualStyleBackColor = true;
-            // 
-            // uxZipExt3
-            // 
-            this.uxZipExt3.Location = new System.Drawing.Point(431, 101);
-            this.uxZipExt3.Name = "uxZipExt3";
-            this.uxZipExt3.Size = new System.Drawing.Size(68, 20);
-            this.uxZipExt3.TabIndex = 26;
             // 
             // uxZip3
             // 
@@ -295,19 +259,12 @@
             // uxPreferred4
             // 
             this.uxPreferred4.AutoSize = true;
-            this.uxPreferred4.Location = new System.Drawing.Point(528, 130);
+            this.uxPreferred4.Location = new System.Drawing.Point(443, 130);
             this.uxPreferred4.Name = "uxPreferred4";
             this.uxPreferred4.Size = new System.Drawing.Size(14, 13);
             this.uxPreferred4.TabIndex = 34;
             this.uxPreferred4.TabStop = true;
             this.uxPreferred4.UseVisualStyleBackColor = true;
-            // 
-            // uxZipExt4
-            // 
-            this.uxZipExt4.Location = new System.Drawing.Point(431, 127);
-            this.uxZipExt4.Name = "uxZipExt4";
-            this.uxZipExt4.Size = new System.Drawing.Size(68, 20);
-            this.uxZipExt4.TabIndex = 33;
             // 
             // uxZip4
             // 
@@ -347,19 +304,12 @@
             // uxPreferred5
             // 
             this.uxPreferred5.AutoSize = true;
-            this.uxPreferred5.Location = new System.Drawing.Point(528, 156);
+            this.uxPreferred5.Location = new System.Drawing.Point(443, 156);
             this.uxPreferred5.Name = "uxPreferred5";
             this.uxPreferred5.Size = new System.Drawing.Size(14, 13);
             this.uxPreferred5.TabIndex = 41;
             this.uxPreferred5.TabStop = true;
             this.uxPreferred5.UseVisualStyleBackColor = true;
-            // 
-            // uxZipExt5
-            // 
-            this.uxZipExt5.Location = new System.Drawing.Point(431, 153);
-            this.uxZipExt5.Name = "uxZipExt5";
-            this.uxZipExt5.Size = new System.Drawing.Size(68, 20);
-            this.uxZipExt5.TabIndex = 40;
             // 
             // uxZip5
             // 
@@ -410,45 +360,39 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(590, 238);
+            this.ClientSize = new System.Drawing.Size(503, 238);
             this.Controls.Add(this.uxSave);
             this.Controls.Add(this.uxPreferred5);
-            this.Controls.Add(this.uxZipExt5);
             this.Controls.Add(this.uxZip5);
             this.Controls.Add(this.uxStateName5);
             this.Controls.Add(this.uxCityName5);
             this.Controls.Add(this.uxStreetName5);
             this.Controls.Add(this.uxStreetNum5);
             this.Controls.Add(this.uxPreferred4);
-            this.Controls.Add(this.uxZipExt4);
             this.Controls.Add(this.uxZip4);
             this.Controls.Add(this.uxStateName4);
             this.Controls.Add(this.uxCityName4);
             this.Controls.Add(this.uxStreetName4);
             this.Controls.Add(this.uxStreetNum4);
             this.Controls.Add(this.uxPreferred3);
-            this.Controls.Add(this.uxZipExt3);
             this.Controls.Add(this.uxZip3);
             this.Controls.Add(this.uxStateName3);
             this.Controls.Add(this.uxCityName3);
             this.Controls.Add(this.uxStreetName3);
             this.Controls.Add(this.uxStreetNum3);
             this.Controls.Add(this.uxPreferred2);
-            this.Controls.Add(this.uxZipExt2);
             this.Controls.Add(this.uxZip2);
             this.Controls.Add(this.uxStateName2);
             this.Controls.Add(this.uxCityName2);
             this.Controls.Add(this.uxStreetName2);
             this.Controls.Add(this.uxStreetNum2);
             this.Controls.Add(this.uxPreferred1);
-            this.Controls.Add(this.uxZipExt1);
             this.Controls.Add(this.uxZip1);
             this.Controls.Add(this.uxState1);
             this.Controls.Add(this.uxCityName1);
             this.Controls.Add(this.uxStreetName1);
             this.Controls.Add(this.uxStreetNum1);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -469,38 +413,32 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox uxStreetNum1;
         private System.Windows.Forms.TextBox uxStreetName1;
         private System.Windows.Forms.TextBox uxCityName1;
         private System.Windows.Forms.TextBox uxState1;
         private System.Windows.Forms.TextBox uxZip1;
-        private System.Windows.Forms.TextBox uxZipExt1;
         private System.Windows.Forms.RadioButton uxPreferred1;
         private System.Windows.Forms.RadioButton uxPreferred2;
-        private System.Windows.Forms.TextBox uxZipExt2;
         private System.Windows.Forms.TextBox uxZip2;
         private System.Windows.Forms.TextBox uxStateName2;
         private System.Windows.Forms.TextBox uxCityName2;
         private System.Windows.Forms.TextBox uxStreetName2;
         private System.Windows.Forms.TextBox uxStreetNum2;
         private System.Windows.Forms.RadioButton uxPreferred3;
-        private System.Windows.Forms.TextBox uxZipExt3;
         private System.Windows.Forms.TextBox uxZip3;
         private System.Windows.Forms.TextBox uxStateName3;
         private System.Windows.Forms.TextBox uxCityName3;
         private System.Windows.Forms.TextBox uxStreetName3;
         private System.Windows.Forms.TextBox uxStreetNum3;
         private System.Windows.Forms.RadioButton uxPreferred4;
-        private System.Windows.Forms.TextBox uxZipExt4;
         private System.Windows.Forms.TextBox uxZip4;
         private System.Windows.Forms.TextBox uxStateName4;
         private System.Windows.Forms.TextBox uxCityName4;
         private System.Windows.Forms.TextBox uxStreetName4;
         private System.Windows.Forms.TextBox uxStreetNum4;
         private System.Windows.Forms.RadioButton uxPreferred5;
-        private System.Windows.Forms.TextBox uxZipExt5;
         private System.Windows.Forms.TextBox uxZip5;
         private System.Windows.Forms.TextBox uxStateName5;
         private System.Windows.Forms.TextBox uxCityName5;

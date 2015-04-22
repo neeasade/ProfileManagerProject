@@ -13,20 +13,23 @@ namespace ProfileManagerTestView
 {
     public partial class AddUser : Form
     {
-        public ViewDB mViewDBForm;
+        public ProfileController mProfileController;
+        public string mSelectedUser;
         public string mMode;
 
-        public void setMode(string aMode, User aUser = null)
+        public void setMode(string aMode, string aUser = "")
         {
             mMode = aMode;
-            if (mMode == "edit" && aUser != null)
+            if (mMode == "edit" && aUser != "")
             {
-                uxName.Text = aUser.Name;
-                uxEmail.Text = aUser.Email;
-                uxUsername.Text = aUser.UserName;
-                uxRecoveryQuestion.Text = aUser.RecoveryQuestion;
-                uxRecoveryAnswer.Text = aUser.RecoveryAnswer;
-                uxPhoneNumber.Text = aUser.PhoneNumber;
+                mSelectedUser = aUser;
+                uxName.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.Name);
+                uxEmail.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.Email);
+                uxUsername.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.Username);
+                uxRecoveryQuestion.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.RecoveryQuestion);
+                uxRecoveryAnswer.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.RecoveryAnswer);
+                uxPhoneNumber.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.PhoneNumber);
+                uxName.Text = mProfileController.GetUserProperty(mSelectedUser, UserProperty.Name);
                 uxEmail.Enabled = false;
                 uxPassword.Enabled = false;
                 uxConfirmPassword.Enabled = false;
@@ -58,12 +61,12 @@ namespace ProfileManagerTestView
             if (mMode == "edit")
             {
                 //editing an existing user
-                User lUser = mViewDBForm.mUserDB.FindUser(uxEmail.Text);
-                lUser.Name = uxName.Text;
-                lUser.UserName = uxUsername.Text;
-                lUser.PhoneNumber = uxPhoneNumber.Text;
-                lUser.RecoveryAnswer = uxRecoveryAnswer.Text;
-                lUser.RecoveryQuestion = uxRecoveryQuestion.Text;
+                mProfileController.SetUserProperty(mSelectedUser,UserProperty.Name,uxName.Text);
+                mProfileController.SetUserProperty(mSelectedUser,UserProperty.Username,uxUsername.Text);
+                mProfileController.SetUserProperty(mSelectedUser,UserProperty.PhoneNumber,uxPhoneNumber.Text);
+                mProfileController.SetUserProperty(mSelectedUser,UserProperty.RecoveryQuestion,uxRecoveryQuestion.Text);
+                mProfileController.SetUserProperty(mSelectedUser,UserProperty.RecoveryAnswer,uxRecoveryAnswer.Text);
+
                 this.Close();
             }
             else if (mMode == "add")
@@ -71,13 +74,13 @@ namespace ProfileManagerTestView
                 //adding in a new user, check if confirm password
                 if(uxPassword.Text == uxConfirmPassword.Text)
                 {
-                    User lNewUser = new User(uxUsername.Text, uxName.Text, uxEmail.Text,uxPassword.Text,uxRecoveryQuestion.Text,uxRecoveryAnswer.Text,uxPhoneNumber.Text,new List<Address>() );
-                    mViewDBForm.mUserDB.AddUser(lNewUser);
+                    mProfileController.AddUser(uxUsername.Text, uxName.Text, uxEmail.Text, uxPassword.Text, uxRecoveryQuestion.Text, uxRecoveryAnswer.Text, uxPhoneNumber.Text);
                     this.Close();
                 }
                 else
                 {
                     MessageBox.Show("Password not confirmed!");
+                    return;
                 }
             }
         }
@@ -85,7 +88,8 @@ namespace ProfileManagerTestView
         private void uxPasswordChange_Click(object sender, EventArgs e)
         {
             PasswordChange lPassChangeForm = new PasswordChange();
-            lPassChangeForm.mUser = mViewDBForm.mUserDB.FindUser(uxEmail.Text);
+            lPassChangeForm.mProfileController = mProfileController;
+            lPassChangeForm.mSelectedUser = mSelectedUser;
             lPassChangeForm.ShowDialog();
         }
     }

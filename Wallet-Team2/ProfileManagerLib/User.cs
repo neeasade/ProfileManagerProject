@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    public class User
+    internal class User
     {
         private string mName;
         private string mUserName;
@@ -136,18 +136,18 @@ namespace ProfileManagerLib
         /// If there are 5 existing addresses for this user, the last on the list will be removed.
         /// </summary>
         /// <param name="aAddressToAdd"></param>
-        public void AddAddress(string aStreetNumber,string aStreetName, string aCity, string aState, string aZip, string aZipExt)
+        public void AddAddress(string aStreetNumber,string aStreetName, string aCity, string aState, string aZip)
         {
             if (mLoggedIn)
             {
                 if (mAddresses.Count == 5)
                 {
                     mAddresses.RemoveAt(4);
-                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip, aZipExt));
+                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip));
                 }
                 else
                 {
-                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip, aZipExt));
+                    mAddresses.Add(new Address(aStreetNumber, aStreetName, aCity, aState, aZip));
                 }
             }
         }
@@ -266,12 +266,11 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
-        /// Either return the current password if recovery answer is correct, or return and empty string.
+        /// Either return the current password if recovery answer is correct, or return null.
         /// </summary>
-        /// <returns></returns>
         public string RecoverPassword(string aRecoveryAnswer)
         {
-            return (aRecoveryAnswer == mRecoveryAnswer ? mPassword : "");
+            return (aRecoveryAnswer == mRecoveryAnswer ? mPassword : null);
         }
 
         /// <summary>

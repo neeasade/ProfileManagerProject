@@ -13,7 +13,8 @@ namespace ProfileManagerTestView
 {
     public partial class PasswordChange : Form
     {
-        public User mUser;
+        public ProfileController mProfileController;
+        public string mSelectedUser;
 
         public PasswordChange()
         {
@@ -24,7 +25,7 @@ namespace ProfileManagerTestView
         {
             if (uxNewPass.Text == uxNewPassConfirm.Text)
             {
-                if (!mUser.ChangePassword(uxCurrentPass.Text, uxNewPass.Text))
+                if (!mProfileController.ChangeUserPassword(mSelectedUser,uxCurrentPass.Text, uxNewPass.Text))
                 {
                     MessageBox.Show("Incorrect current password!");
                 }

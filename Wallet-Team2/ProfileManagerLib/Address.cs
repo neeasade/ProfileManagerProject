@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    public class Address
+    internal class Address
     {
         private string mStreetNumber;
         private string mZip;
-        private string mZipExt;
         private string mStreet;
         private string mCity;
         private string mState;
@@ -24,11 +23,6 @@ namespace ProfileManagerLib
         {
             get { return mZip; }
             set { mZip = value; }
-        }
-        public string ZipExt
-        { 
-            get { return mZipExt; }
-            set { mZipExt = value; }
         }
         public string Street
         {
@@ -54,10 +48,9 @@ namespace ProfileManagerLib
         /// <param name="aStreetNumber"></param>
         /// <param name="aStreetName"></param>
         /// <param name="?"></param>
-        public Address(string aStreetNumber,string aStreetName, string aCity, string aState, string aZip, string aZipExt){
+        public Address(string aStreetNumber,string aStreetName, string aCity, string aState, string aZip){
           mStreetNumber = aStreetNumber;
           mZip = aZip;
-          mZipExt = aZipExt;
           mStreet = aStreetName;
           mCity = aCity;
           mState = aState;
@@ -70,7 +63,7 @@ namespace ProfileManagerLib
         /// <returns></returns>
         public override string ToString()
         {
-            return mStreetNumber + " " + mStreet + ", " + mCity + ", " + mState + " " + mZip + " " + mZipExt;
+            return mStreetNumber + " " + mStreet + ", " + mCity + ", " + mState + " " + mZip;
         }
 
         /// <summary>
@@ -80,7 +73,7 @@ namespace ProfileManagerLib
         public string toDBString()
         {
             string lDelim = "+";
-            return mStreetNumber + lDelim + mStreet + lDelim + mCity + lDelim + mState + lDelim + mZip + lDelim + mZipExt;
+            return mStreetNumber + lDelim + mStreet + lDelim + mCity + lDelim + mState + lDelim + mZip;
         }
 
     }
