@@ -32,12 +32,7 @@ namespace ProfileManagerLib
         /// <param name="aEmail"></param>
         public bool EmailConflicts(string aEmail)
         {
-            for (int i=0; i< mUsers.Count; i++)
-            {
-                if(mUsers[i].Email == aEmail)
-                    return true;
-            }
-            return false;
+            return (mUsers.Where<User>(tmpUser => tmpUser.Email == aEmail).Count() == 0 ? false : true);
         }
 
         /// <summary>
@@ -47,12 +42,7 @@ namespace ProfileManagerLib
         /// <returns></returns>
         public bool UsernameConflicts(string aUsername)
         {
-            for (int i=0; i< mUsers.Count; i++)
-            {
-                if(mUsers[i].UserName == aUsername)
-                    return true;
-            }
-            return false;
+            return (mUsers.Where<User>(tmpUser => tmpUser.UserName == aUsername).Count() == 0 ? false : true);
         }
 
         /// <summary>
@@ -62,14 +52,8 @@ namespace ProfileManagerLib
         /// <returns>Returns the matching user, or returns null if the User does not exist.</returns>
         public User FindUser(string aEmail)
         {
-            for (int i=0; i< mUsers.Count; i++)
-            {
-                if(mUsers[i].Email == aEmail)
-                {
-                    return mUsers[i];
-                }
-            }
-            return null;
+            //FirstOrDefault returns null if not User with that email is found.
+            return mUsers.FirstOrDefault<User>(tmpUser => tmpUser.Email == aEmail);
         }
 
         /// <summary>
@@ -234,14 +218,7 @@ namespace ProfileManagerLib
                 string result = string.Empty;
                 foreach (char lChar in aLine)
                 {
-                    if(uncypher)
-                    {
-                        result += (char)(lChar - 10);
-                    }
-                    else
-                    {
-                        result += (char)(lChar + 10);
-                    }
+                    result += (uncypher ? (char)(lChar - 10) : (char)(lChar + 10));
                 }
                 toReturn.Add(result);
             }
