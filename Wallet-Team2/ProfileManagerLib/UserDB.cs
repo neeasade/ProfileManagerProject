@@ -172,14 +172,7 @@ namespace ProfileManagerLib
         /// <param name="aEmail"></param>
         public void DeleteUser(string aEmail)
         {
-            for(int i=0;i<mUsers.Count;i++)
-            {
-                if(mUsers[i].Email == aEmail)
-                {
-                    mUsers.RemoveAt(i);
-                    return;
-                }
-            }
+            mUsers.RemoveAt(mUsers.FindIndex(tmpUser=>tmpUser.Email == aEmail));
         }
 
         /// <summary>
