@@ -13,69 +13,64 @@ namespace ProfileManagerTestView
 {
     public partial class EditAddress : Form
     {
-        public User mUser;
+        //public User mUser;
+        public ProfileController mProfileController;
+        public string mUserEmail;
         
         public void loadDisplay()
         {
-            //terrible code
-            Address lAddress;
-            List<Address> lUserAddresses = mUser.getAddresses();
+            //decades pass 
 
+            string lStreetNum = mProfileController.GetUserAddressValue(mUserEmail,1,AddressProperty.StreetNumber);
             //load in the Address info for each address available from the User.
-            if(lUserAddresses.Count >= 1)
+            if( lStreetNum != null)
             {
                 uxPreferred1.Checked = true;
-                lAddress = lUserAddresses[0];
-                uxStreetNum1.Text = lAddress.StreetNumber;
-                uxStreetName1.Text = lAddress.Street;
-                uxCityName1.Text = lAddress.City;
-                uxState1.Text = lAddress.State;
-                uxZip1.Text = lAddress.Zip;
-                uxZipExt1.Text = lAddress.ZipExt;
+                uxStreetNum1.Text = lStreetNum;
+                uxStreetName1.Text = mProfileController.GetUserAddressValue(mUserEmail, 1, AddressProperty.StreetName);
+                uxCityName1.Text = mProfileController.GetUserAddressValue(mUserEmail, 1, AddressProperty.City);
+                uxState1.Text = mProfileController.GetUserAddressValue(mUserEmail, 1, AddressProperty.State);
+                uxZip1.Text = mProfileController.GetUserAddressValue(mUserEmail, 1, AddressProperty.Zip);
             }
 
-            if(lUserAddresses.Count >= 2)
+            lStreetNum = mProfileController.GetUserAddressValue(mUserEmail,2,AddressProperty.StreetNumber);
+            if(lStreetNum != null)
             {
-                lAddress = lUserAddresses[1];
-                uxStreetNum2.Text = lAddress.StreetNumber;
-                uxStreetName2.Text = lAddress.Street;
-                uxCityName2.Text = lAddress.City;
-                uxStateName2.Text = lAddress.State;
-                uxZip2.Text = lAddress.Zip;
-                uxZipExt2.Text = lAddress.ZipExt;
+                uxStreetNum2.Text = lStreetNum;
+                uxStreetName2.Text = mProfileController.GetUserAddressValue(mUserEmail, 2, AddressProperty.StreetName);
+                uxCityName2.Text = mProfileController.GetUserAddressValue(mUserEmail, 2, AddressProperty.City);
+                uxStateName2.Text = mProfileController.GetUserAddressValue(mUserEmail, 2, AddressProperty.State);
+                uxZip2.Text = mProfileController.GetUserAddressValue(mUserEmail, 2, AddressProperty.Zip);
             }
 
-            if(lUserAddresses.Count >= 3)
+            lStreetNum = mProfileController.GetUserAddressValue(mUserEmail,3,AddressProperty.StreetNumber);
+            if(lStreetNum != null)
             {
-                lAddress = lUserAddresses[2];
-                uxStreetNum3.Text = lAddress.StreetNumber;
-                uxStreetName3.Text = lAddress.Street;
-                uxCityName3.Text = lAddress.City;
-                uxStateName3.Text = lAddress.State;
-                uxZip3.Text = lAddress.Zip;
-                uxZipExt3.Text = lAddress.ZipExt;
+                uxStreetNum3.Text = lStreetNum;
+                uxStreetName3.Text = mProfileController.GetUserAddressValue(mUserEmail, 3, AddressProperty.StreetName);
+                uxCityName3.Text = mProfileController.GetUserAddressValue(mUserEmail, 3, AddressProperty.City);
+                uxStateName3.Text = mProfileController.GetUserAddressValue(mUserEmail, 3, AddressProperty.State);
+                uxZip3.Text = mProfileController.GetUserAddressValue(mUserEmail, 3, AddressProperty.Zip);
             }
 
-            if(lUserAddresses.Count >= 4)
+            lStreetNum = mProfileController.GetUserAddressValue(mUserEmail,4,AddressProperty.StreetNumber);
+            if(lStreetNum != null)
             {
-                lAddress = lUserAddresses[3];
-                uxStreetNum4.Text = lAddress.StreetNumber;
-                uxStreetName4.Text = lAddress.Street;
-                uxCityName4.Text = lAddress.City;
-                uxStateName4.Text = lAddress.State;
-                uxZip4.Text = lAddress.Zip;
-                uxZipExt4.Text = lAddress.ZipExt;
+                uxStreetNum4.Text = lStreetNum;
+                uxStreetName4.Text = mProfileController.GetUserAddressValue(mUserEmail, 4, AddressProperty.StreetName);
+                uxCityName4.Text = mProfileController.GetUserAddressValue(mUserEmail, 4, AddressProperty.City);
+                uxStateName4.Text = mProfileController.GetUserAddressValue(mUserEmail, 4, AddressProperty.State);
+                uxZip4.Text = mProfileController.GetUserAddressValue(mUserEmail, 4, AddressProperty.Zip);
             }
 
-            if(lUserAddresses.Count >= 5)
+            lStreetNum = mProfileController.GetUserAddressValue(mUserEmail,5,AddressProperty.StreetNumber);
+            if(lStreetNum != null)
             {
-                lAddress = lUserAddresses[4];
-                uxStreetNum5.Text = lAddress.StreetNumber;
-                uxStreetName5.Text = lAddress.Street;
-                uxCityName5.Text = lAddress.City;
-                uxStateName5.Text = lAddress.State;
-                uxZip5.Text = lAddress.Zip;
-                uxZipExt5.Text = lAddress.ZipExt;
+                uxStreetNum5.Text = lStreetNum;
+                uxStreetName5.Text = mProfileController.GetUserAddressValue(mUserEmail, 5, AddressProperty.StreetName);
+                uxCityName5.Text = mProfileController.GetUserAddressValue(mUserEmail, 5, AddressProperty.City);
+                uxStateName5.Text = mProfileController.GetUserAddressValue(mUserEmail, 5, AddressProperty.State);
+                uxZip5.Text = mProfileController.GetUserAddressValue(mUserEmail, 5, AddressProperty.Zip);
             }
         }
 
@@ -86,43 +81,41 @@ namespace ProfileManagerTestView
 
         private void uxSave_Click(object sender, EventArgs e)
         {
-            mUser.ClearAddresses();
-            Address lAddress;
-
             //SHIELD YOUR EYES
 
-            //check if all spaces are empty for each line, and if not, add them.
+            //Clear all users addresses
+            mProfileController.ClearUserAddresses(mUserEmail);
+
+            //check if all spaces are empty for each line, and if not, Add address to user:
             if(uxStreetNum1.Text != "" && uxStreetName1.Text != "" && uxCityName1.Text != "" && uxState1.Text != "" && uxZip1.Text != "")
             {
-                mUser.AddAddress(uxStreetNum1.Text, uxStreetName1.Text, uxCityName1.Text, uxState1.Text, uxZip1.Text, uxZipExt1.Text);
+                mProfileController.AddAddressToUser(mUserEmail, uxStreetNum1.Text, uxStreetName1.Text, uxCityName1.Text, uxState1.Text, uxZip1.Text);
             }
+
             if(uxStreetNum2.Text != "" && uxStreetName2.Text != "" && uxCityName2.Text != "" && uxStateName2.Text != "" && uxZip2.Text != "")
             {
-                lAddress = (new Address(uxStreetNum2.Text, uxStreetName2.Text, uxCityName2.Text, uxStateName2.Text, uxZip2.Text, uxZipExt2.Text));
-                mUser.AddAddress(lAddress);
+                mProfileController.AddAddressToUser(mUserEmail, uxStreetNum2.Text, uxStreetName2.Text, uxCityName2.Text, uxStateName2.Text, uxZip2.Text);
                 if (uxPreferred2.Checked)
-                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
+                    mProfileController.SetUserPreferredAddressByString(mUserEmail, mProfileController.GetUserAddressValue(mUserEmail, mProfileController.GetUserAddressCount(mUserEmail), AddressProperty.ToString));
             }
+
             if(uxStreetNum3.Text != "" && uxStreetName3.Text != "" && uxCityName3.Text != "" && uxStateName3.Text != "" && uxZip3.Text != "")
             {
-                lAddress = (new Address(uxStreetNum3.Text, uxStreetName3.Text, uxCityName3.Text, uxStateName3.Text, uxZip3.Text, uxZipExt3.Text));
-                mUser.AddAddress(lAddress);
+                mProfileController.AddAddressToUser(mUserEmail, uxStreetNum3.Text, uxStreetName3.Text, uxCityName3.Text, uxStateName3.Text, uxZip3.Text);
                 if (uxPreferred3.Checked)
-                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
+                    mProfileController.SetUserPreferredAddressByString(mUserEmail, mProfileController.GetUserAddressValue(mUserEmail, mProfileController.GetUserAddressCount(mUserEmail), AddressProperty.ToString));
             }
             if(uxStreetNum4.Text != "" && uxStreetName4.Text != "" && uxCityName4.Text != "" && uxStateName4.Text != "" && uxZip4.Text != "")
             {
-                lAddress = (new Address(uxStreetNum4.Text, uxStreetName4.Text, uxCityName4.Text, uxStateName4.Text, uxZip4.Text, uxZipExt4.Text));
-                mUser.AddAddress(lAddress);
+                mProfileController.AddAddressToUser(mUserEmail, uxStreetNum4.Text, uxStreetName4.Text, uxCityName4.Text, uxStateName4.Text, uxZip4.Text);
                 if (uxPreferred4.Checked)
-                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
+                    mProfileController.SetUserPreferredAddressByString(mUserEmail, mProfileController.GetUserAddressValue(mUserEmail, mProfileController.GetUserAddressCount(mUserEmail), AddressProperty.ToString));
             }
             if(uxStreetNum5.Text != "" && uxStreetName5.Text != "" && uxCityName5.Text != "" && uxStateName5.Text != "" && uxZip5.Text != "")
             {
-                lAddress = (new Address(uxStreetNum5.Text, uxStreetName5.Text, uxCityName5.Text, uxStateName5.Text, uxZip5.Text, uxZipExt5.Text));
-                mUser.AddAddress(lAddress);
+                mProfileController.AddAddressToUser(mUserEmail, uxStreetNum5.Text, uxStreetName2.Text, uxCityName2.Text, uxStateName2.Text, uxZip2.Text);
                 if (uxPreferred5.Checked)
-                    mUser.SetPreferredShippingAddressByString(lAddress.ToString());
+                    mProfileController.SetUserPreferredAddressByString(mUserEmail, mProfileController.GetUserAddressValue(mUserEmail, mProfileController.GetUserAddressCount(mUserEmail), AddressProperty.ToString));
             }
             this.Close();
         }

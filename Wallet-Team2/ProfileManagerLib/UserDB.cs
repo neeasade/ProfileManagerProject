@@ -7,24 +7,32 @@ using System.Threading.Tasks;
 
 namespace ProfileManagerLib
 {
-    public class UserDB
+    internal class UserDB
     {
-
         //List of Users loaded in the DB
         private List<User> mUsers;
+
+        public int NumberOfUsers
+        {
+            get { return mUsers.Count; }
+        }
+
+        /// <summary>
+        /// Get the email of a user by their index in the database. 
+        /// </summary>
+        /// <param name="aIndex"></param>
+        public string FindEmailAtIndex(int aIndex)
+        {
+            return (mUsers.Count > aIndex ? mUsers[aIndex].Email : null);
+        }
 
         /// <summary>
         /// Determine if an Email Conflicts with an existing User.
         /// </summary>
         /// <param name="aEmail"></param>
-        public bool DoesEmailConflict(string aEmail)
+        public bool EmailConflicts(string aEmail)
         {
-            for (int i=0; i< mUsers.Count; i++)
-            {
-                if(mUsers[i].Email == aEmail)
-                    return true;
-            }
-            return false;
+            return (mUsers.Where<User>(tmpUser => tmpUser.Email == aEmail).Count() == 0 ? false : true);
         }
 
         /// <summary>
@@ -32,14 +40,9 @@ namespace ProfileManagerLib
         /// </summary>
         /// <param name="aUsername"></param>
         /// <returns></returns>
-        public bool DoesUsernameConflict(string aUsername)
+        public bool UsernameConflicts(string aUsername)
         {
-            for (int i=0; i< mUsers.Count; i++)
-            {
-                if(mUsers[i].UserName == aUsername)
-                    return true;
-            }
-            return false;
+            return (mUsers.Where<User>(tmpUser => tmpUser.UserName == aUsername).Count() == 0 ? false : true);
         }
 
         /// <summary>
@@ -49,14 +52,8 @@ namespace ProfileManagerLib
         /// <returns>Returns the matching user, or returns null if the User does not exist.</returns>
         public User FindUser(string aEmail)
         {
-            for (int i=0; i< mUsers.Count; i++)
-            {
-                if(mUsers[i].Email == aEmail)
-                {
-                    return mUsers[i];
-                }
-            }
-            return null;
+            //FirstOrDefault returns null if not User with that email is found.
+            return mUsers.FirstOrDefault<User>(tmpUser => tmpUser.Email == aEmail);
         }
 
         /// <summary>
@@ -94,12 +91,17 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
-        /// Add a new user to the database
+        /// Add a new user to the database. Fails if there is a conflicting Username or email.
         /// </summary>
         /// <param name="aNewUser"></param>
-        public void AddUser(User aNewUser)
+        public bool AddUser(User aNewUser)
         {
-            mUsers.Add(aNewUser);
+            if(!EmailConflicts(aNewUser.Email) && !UsernameConflicts(aNewUser.UserName))
+            {
+                mUsers.Add(aNewUser);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
@@ -120,8 +122,8 @@ namespace ProfileManagerLib
             for(int i=0; i<aSeedNum;i++)
             {
                 List<Address> lAddresses = new List<Address>();
-                lAddresses.Add(new Address(i.ToString(), "Oak St", "Manhattan","KS","66502",i.ToString().PadLeft(3,'0')));
-                lAddresses.Add(new Address(i.ToString(), "Acorn St", "Richmond","VA","69696",i.ToString().PadLeft(3,'0')));
+                lAddresses.Add(new Address(i.ToString(), "Oak St", "Manhattan","KS","66502"));
+                lAddresses.Add(new Address(i.ToString(), "Acorn St", "Richmond","VA","69696"));
                 User lUser = new User("Username" + i, "Full Name" + i, "Email" + i + "@botnet.com", "pass" + i, "Recovery question " + i + "?", "Recovery Answer " + i, "000-000-" + i.ToString().PadLeft(4, '0'), lAddresses);
                 lUser.LogIn("pass" + i);
                 mUsers.Add(lUser);
@@ -156,7 +158,7 @@ namespace ProfileManagerLib
                     for (int j=0; j < lUserDBAddresses.Length; j++)
                     {
                         string[] lAddrInfo = lUserDBAddresses[j].Split('+');
-                        lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4], lAddrInfo[5]));
+                        lUserAddresses.Add(new Address(lAddrInfo[0], lAddrInfo[1], lAddrInfo[2], lAddrInfo[3], lAddrInfo[4]));
                     }
                 }
                 //add the new user to the User DB list
@@ -170,14 +172,7 @@ namespace ProfileManagerLib
         /// <param name="aEmail"></param>
         public void DeleteUser(string aEmail)
         {
-            for(int i=0;i<mUsers.Count;i++)
-            {
-                if(mUsers[i].Email == aEmail)
-                {
-                    mUsers.RemoveAt(i);
-                    return;
-                }
-            }
+            mUsers.RemoveAt(mUsers.FindIndex(tmpUser=>tmpUser.Email == aEmail));
         }
 
         /// <summary>
@@ -216,14 +211,7 @@ namespace ProfileManagerLib
                 string result = string.Empty;
                 foreach (char lChar in aLine)
                 {
-                    if(uncypher)
-                    {
-                        result += (char)(lChar - 10);
-                    }
-                    else
-                    {
-                        result += (char)(lChar + 10);
-                    }
+                    result += (uncypher ? (char)(lChar - 10) : (char)(lChar + 10));
                 }
                 toReturn.Add(result);
             }
