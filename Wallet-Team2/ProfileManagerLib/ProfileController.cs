@@ -79,9 +79,9 @@ namespace ProfileManagerLib
         /// <summary>
         /// Make a new ProfileController who's data is determined by loading in a text file, determined by parameter.
         /// </summary>
-        public ProfileController(string aDBlocation)
+        public ProfileController(string aDBLocation)
         {
-            mUserDB = new UserDB(aDBlocation);
+            mUserDB = new UserDB(aDBLocation);
         }
 
         //---------------------------------------- Get and set User and Address Values -----------------------------------
@@ -363,9 +363,9 @@ namespace ProfileManagerLib
         /// Save the database to a location.
         /// </summary>
         /// <returns></returns>
-        public bool SaveDatabase(string aDBlocation)
+        public bool SaveDatabase(string aDBLocation)
         {
-            return mUserDB.Save(aDBlocation);
+            return mUserDB.Save(aDBLocation);
         }
     }
 }
