@@ -28,7 +28,32 @@ namespace ProfileManagerLib
         ToString
     };
 
-    public class ProfileController
+
+    public interface IProfileController
+    {
+         string GetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty);
+         bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue);
+         string GetUserProperty(string aEmail, UserProperty aUserProperty);
+         bool SetUserProperty(string aEmail, UserProperty aUserProperty, string aUserValue);
+         int NumberOfUsers();
+         int GetUserAddressCount(string aEmail);
+         void SetUserPreferredAddressByString(string aEmail, string aAddressToString);
+         bool ChangeUserPassword(string aEmail, string aCurPassword, string aNewPassword);
+         bool UserLoggedIn(string aEmail);
+         bool LogUserIn(string aEmail, string aPassword) ;
+         void LogUserOut(string aEmail);
+         string FindEmail(string aUsername);
+         string FindEmail(int aUserIndex);
+         bool AddUser(string aUsername, string aName, string aEmail, string aPassword, string aRecoveryQuestion, string aRecoveryAnswer, string aPhoneNumber);
+         void AddAddressToUser(string aEmail, string aStreetNumber, string aStreetName, string aCity, string aState, string aZip);
+         string GetUserPreferredAddress(string aEmail);
+         void ClearUserAddresses(string aEmail);
+         void DeleteUser(string aEmail);
+         string RecoverPassword(string aEmail, string aRecoveryAnswer);
+         bool SaveDatabase(string aDBlocation);
+    }
+
+    public class ProfileController : IProfileController
     {
         private UserDB mUserDB;
 

@@ -276,6 +276,17 @@ namespace ProfileManagerTestView
             string response = mProfileController.GetUserProperty(mSelectedUserEmail, UserProperty.Username);
             MessageBox.Show("The username for that email is " + response);
         }
+
+        /// <summary>
+        /// Delete a User.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button10_Click(object sender, EventArgs e)
+        {
+            mProfileController.DeleteUser(mSelectedUserEmail);
+            LoadDisplay();
+        }
     }
 
     public static class Prompt
