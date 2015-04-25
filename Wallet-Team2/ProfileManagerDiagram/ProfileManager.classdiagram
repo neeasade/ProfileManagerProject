@@ -85,15 +85,29 @@
       <class Id="ce51abe1-e987-4852-85ff-3bedbb129f81" name="User" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="d897124b-90ca-448f-8e22-f1135c34d758" />
         <suppliersInternal>
-          <dependency Id="da721d0c-d38c-4e51-acee-1f6e1ea23d8a">
-            <classMoniker Id="af8de3ea-5a87-4b57-b97b-54c2345d007c" LastKnownName="Address" />
-            <elementDefinition Id="b0594a9c-7f9f-43c1-971e-35ecd9009334" />
-          </dependency>
-          <dependency Id="4533fe81-51f3-4ce1-a144-33a7270b1a25">
+          <interfaceRealization Id="9fddcc21-c7b5-41b3-8a44-f6076b05c01a">
             <interfaceMoniker Id="4cde726e-d7d5-4f4b-befd-1290c609dddd" LastKnownName="IUser" />
-            <elementDefinition Id="8ad2dfde-6f1d-415d-998d-6a0134622ee7" />
-          </dependency>
+            <elementDefinition Id="678991a8-87c6-4a71-be49-64daacd324f8" />
+          </interfaceRealization>
         </suppliersInternal>
+        <targetEnds>
+          <association Id="8d5b9036-59e5-48d8-bb06-0d35c6bf75c1" isDerived="false" sourceEndRoleName="User" targetEndRoleName="Address" isLeaf="false" isAbstract="false">
+            <classMoniker Id="af8de3ea-5a87-4b57-b97b-54c2345d007c" LastKnownName="Address" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ab99e00a-6a1c-4a77-bdc6-381f66dd8039" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2bedc241-f4ff-4778-b1a2-3904dedd3e01" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="22e0ea94-4aff-45b3-9d5d-4cac1ea55367" name="Address" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="4f2cc8e7-5282-462a-ad77-e547094d6fc4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="bd26698e-801f-4f69-96e8-5f79f5f24d87" />
+          </association>
+        </targetEnds>
         <ownedAttributesInternal>
           <property Id="628a8b50-5ed4-4903-b6ee-175c9a1d259c" name="String" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <elementDefinition Id="f0611e51-efe4-4f3c-b1a4-6d2a84b5ec25" />
@@ -220,6 +234,9 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="587dc5cd-dd86-4626-9404-bf82ea269349" name="RecoverUsername" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="dddb6f74-ac5e-46ae-b464-e6617038cfab" />
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -275,10 +292,10 @@
       <class Id="d7b7a784-91c8-49fc-b7be-9284c9967d4c" name="UserDB" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="3fe8a594-f4d9-46a6-83fc-c88f2bbc63c1" />
         <suppliersInternal>
-          <dependency Id="8e43ffb9-7695-4145-a691-d43987dfb782">
+          <interfaceRealization Id="bfa9796e-1bc5-4420-91ae-9420e5a83bb2">
             <interfaceMoniker Id="d1e0e549-89f9-48b2-b5a8-8c51fb408a09" LastKnownName="IUserDB" />
-            <elementDefinition Id="190cc9d5-3ace-4e11-b730-2411cb558e55" />
-          </dependency>
+            <elementDefinition Id="3a970214-bd01-4214-bba1-c3ec68f3a6e3" />
+          </interfaceRealization>
         </suppliersInternal>
         <targetEnds>
           <association Id="79e27408-1114-4e4c-ab41-74524d1ccffd" isDerived="false" sourceEndRoleName="UserDB" targetEndRoleName="User" isLeaf="false" isAbstract="false">
@@ -339,6 +356,9 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="57d78591-3669-4a95-a266-083d20c1ccc4" name="DeleteUser(aEmail" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="04162844-c8a5-4e8e-98dd-57fb479627c2" />
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -347,7 +367,7 @@
         <elementDefinition Id="ddedc146-cc8d-4c1a-b958-2a74576d2259" />
         <targetEnds>
           <association Id="708349c8-d6ef-402e-9046-eafc412ff75d" isDerived="false" sourceEndRoleName="IUser" targetEndRoleName="Controller" isLeaf="false" isAbstract="false">
-            <classMoniker Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" LastKnownName="Controller" />
+            <classMoniker Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" LastKnownName="ProfileController" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="6b4795fd-025d-4c0c-9f77-c23520a65a9e" name="IUser" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -438,7 +458,7 @@
         <elementDefinition Id="14e22929-0f1f-480d-906a-fa69fde5ba45" />
         <targetEnds>
           <association Id="5c27c3b7-2ccf-41a2-856d-be96a6ef19d5" isDerived="false" sourceEndRoleName="IUserDB" targetEndRoleName="Controller" isLeaf="false" isAbstract="false">
-            <classMoniker Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" LastKnownName="Controller" />
+            <classMoniker Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" LastKnownName="ProfileController" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="149e5ef5-cdd9-4b59-9e31-fd43924a077c" name="IUserDB" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
@@ -487,7 +507,7 @@
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" name="Controller" isAbstract="true" isLeaf="false" isActiveClass="false">
+      <class Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" name="ProfileController" isAbstract="true" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="26ff277a-500f-4c80-b292-276b04b393de" />
         <targetEnds>
           <association Id="6efc0217-bb09-41be-945c-2b15d221c684" isDerived="false" sourceEndRoleName="Controller" targetEndRoleName="InputInterface" isLeaf="false" isAbstract="false">
@@ -516,68 +536,30 @@
           </property>
         </ownedAttributesInternal>
         <ownedOperationsInternal>
-          <operation Id="8143125e-9423-430a-8e59-8dc19cbc5319" name="ChangeAddress" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="cdcb868c-c56a-4d8d-8bdc-8ed8390a9190" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="a76478b5-84e7-4817-9e37-2ea5dcbda331" name="integer inStreetNum" direction="In" isUnique="false">
-                  <elementDefinition Id="9764a75c-0b46-4c06-ba8f-b6e567d5bda1" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="7589bba5-0572-43c4-a3e7-247ef5b6751e" name="integer inZip" direction="In" isUnique="false">
-                  <elementDefinition Id="6a677cde-8091-44f2-af93-f99af264733f" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="708a211c-d877-4a7c-83c5-85cb872b0859" name="integer inZipExt" direction="In" isUnique="false">
-                  <elementDefinition Id="d55e6b72-7f54-43af-8dc1-89977384f754" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="3bbe4008-72be-4397-aa37-b8091f101bcf" name="string mStreet" direction="In" isUnique="false">
-                  <elementDefinition Id="9ffad4c7-aecc-4fc7-a3f6-5d954a9de73f" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="26ded98e-0cd6-4291-a9e3-e7bb1eefda4d" name="mCity" direction="In" isUnique="false">
-                  <elementDefinition Id="2861f4cc-bd74-4b74-a60e-67ff4251374f" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="90001d69-2745-4bbf-9dbb-59721020c544" name="mState" direction="In" isUnique="false">
-                  <elementDefinition Id="8c073ef6-dc8e-4761-ab27-c308ee76bd28" />
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="a9ea7cca-d355-43a0-8050-f9aafc0357b5" name="ChangePassword" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+          <operation Id="a9ea7cca-d355-43a0-8050-f9aafc0357b5" name="ChangeUserPassword" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="4fd0f55d-5af5-460c-9c9d-eca0a380ce62" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="3f0b9f74-4937-48ee-9ec3-8ac909ef1801" name="aOldPass" direction="In" isUnique="false">
-                  <elementDefinition Id="8180e2c8-ea5a-4470-a2c3-29b82d076ce8" />
+                <parameter Id="0262deb0-53c2-49eb-8358-a74145ea4ff3" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="c981149e-c331-4dcd-83f0-38b762b07308" />
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="697fbb49-84c8-4c98-93df-423ea0220062" name="aNewPass" direction="In" isUnique="false">
-                  <elementDefinition Id="c449ce98-94ea-4cc5-bc28-e3c3f3518bb9" />
+                <parameter Id="ace9d48c-c5e1-42f9-8737-5fbb8cbd5f1e" name="string aCurrPassword" direction="In" isUnique="false">
+                  <elementDefinition Id="95db1bee-76e0-4fea-9a5f-1268aa4786ea" />
                 </parameter>
               </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="23e430db-f007-4d5a-9225-7381b03dd07f" name="RecoverPassword" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="4e6a9314-f454-4bfe-b17a-12c8f6baa8da" />
-          </operation>
-          <operation Id="8bf1b22b-6651-440f-b78a-d54404e7f2c9" name="RecoverUsername" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="869c0f03-18b6-4a49-8fae-5d38b3c22c76" />
-          </operation>
-          <operation Id="49e3b7d1-05df-465e-8dd5-c3a4af0eee86" name="UpdateEmail" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="9f973c7d-93b6-454b-a158-e2098cf7299c" />
-            <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="a9656f77-519e-4ed3-b716-c9a10218f32d" name="string inNewEmail" direction="In" isUnique="false">
-                  <elementDefinition Id="7b663138-d55e-43bb-b664-3f8705c0558c" />
+                <parameter Id="84a23dc8-ae3a-4ac1-b057-e66159de4a9f" name="string aNewPassword" direction="In" isUnique="false">
+                  <elementDefinition Id="8a214254-adeb-42b0-89e5-ac636e994878" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="82c30335-1005-4296-a462-963085fd79c1" direction="Return" isUnique="false">
+                  <elementDefinition Id="196d2713-0803-456a-82ff-6ef2b9facbb5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" LastKnownName="bool" />
+                  </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
@@ -586,29 +568,445 @@
             <elementDefinition Id="a20c419d-6a90-4712-ac15-66ebd80e8b54" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="b8e1a33c-777e-4126-8baa-5da4851dae53" name="mName" direction="In" isUnique="false">
-                  <elementDefinition Id="db9b2bfe-0548-403f-9bbf-9db229d43e8d" />
+                <parameter Id="6cc5851e-9ef2-43cb-a86d-168af75ba0bf" direction="Return" isUnique="false">
+                  <elementDefinition Id="6cb733b2-7b6a-459f-be54-01e19b8ee521" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" LastKnownName="bool" />
+                  </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="7713dbc0-04d4-48d6-865a-d43f1f3b6e89" name="mEmail" direction="In" isUnique="false">
-                  <elementDefinition Id="a24003b4-e8c6-4cf6-8e94-8ce964576a65" />
+                <parameter Id="b3f82eab-5ba8-4077-911e-c4b525a190ec" name="string aUsername" direction="In" isUnique="false">
+                  <elementDefinition Id="178ed67b-3304-48cc-9836-1d725c7829c4" />
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="8d4fce02-7ae1-4041-a1ee-d1e16cba49d8" name="mPassword" direction="In" isUnique="false">
-                  <elementDefinition Id="51161761-3da5-4aaf-930e-f7aa823e5b7d" />
+                <parameter Id="7df14318-0878-45dd-a153-158012ca55dd" name="string aName" direction="In" isUnique="false">
+                  <elementDefinition Id="21907d80-3f9c-41a6-a865-5cb3702981f3" />
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="ad14525b-6430-4523-b84b-7fdd91231b32" name="mAddress" direction="In" isUnique="false">
-                  <elementDefinition Id="f8a3d3e8-1211-49e0-b149-e8b346061ab3" />
+                <parameter Id="e774ce7a-7826-4aa0-adcc-8827ff982cdc" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="05fa268b-f600-4bc5-8f9c-7e46cb7c457c" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="131a64c4-a6ae-44eb-bb0b-3bcb2951e70b" name="string aPassword" direction="In" isUnique="false">
+                  <elementDefinition Id="633b8501-f877-4f9d-8a9e-affde9fd058f" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="83b30de8-264f-4b4b-b14d-6d32a8406583" name="string aRecoveryQuestion" direction="In" isUnique="false">
+                  <elementDefinition Id="276ec45f-e6e0-492f-b3a0-251b6557dcee" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9de2328e-a3f3-469a-a4d8-104f2420200b" name="string aRecoveryAnswer" direction="In" isUnique="false">
+                  <elementDefinition Id="2e79f209-5144-4535-a4b1-a2cf0fe3acaf" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9b4f1cba-3ad9-4b5a-989e-856bdc2d9973" name="string aPhoneNumber" direction="In" isUnique="false">
+                  <elementDefinition Id="f2af016a-9ffa-40b6-9c71-a73ebcd69b07" />
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
-          <operation Id="e99c2e13-71ea-4ccb-9f82-6b37df4c9abd" name="DeleteUser(aEmail" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+          <operation Id="e99c2e13-71ea-4ccb-9f82-6b37df4c9abd" name="DeleteUser" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="e952c834-44b7-4899-9d96-7e88fc2610a4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b0f26732-e62a-4511-9eae-dcdc307cc468" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="3a7e88b4-74ee-4e02-9cb3-0f4804afe87e" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="875d04a8-7d7c-4c30-900f-67ecccfa5ef1" name="ProfileController" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4512199b-adf6-4734-b8ba-46dffd08d170" />
+          </operation>
+          <operation Id="cfd408cd-b8b5-4383-97e0-c5803e3ebe82" name="ProfileController" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f15f8f43-cd73-4dc6-a85c-98c2120f54e6" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="53a4efd6-56a5-45a3-966c-d0ca91b60889" name="int aFakeUserCount" direction="In" isUnique="false">
+                  <elementDefinition Id="969c9b21-1353-4da6-93c5-b27740fc9d70" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="7833c671-b1c8-440c-8a49-f33fdec13fb2" name="ProfileController" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b9a2a2fb-b81d-4361-9b89-6142098cd3b1" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="375c6ba4-fc8c-4990-b411-3f2c4e0a9a95" name="string aDBlocation" direction="In" isUnique="false">
+                  <elementDefinition Id="8d37d2da-6195-4e8c-933a-bf01b9d2ee2e" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="4faae98c-27d4-4ec7-92e8-751ff0d683e5" name="GetUserAddressValue" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5369c5c4-35d7-42b8-b30b-039e134f0ffb" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="70a6d461-9043-49af-ba6a-dc21610529da" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="1ca9e953-9fda-4e9b-b611-37fc91236d8a" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="58c4c93d-32a5-4824-9c5e-8d1ff7963e05" name="int AddressIndex" direction="In" isUnique="false">
+                  <elementDefinition Id="a16bd71c-bf8d-492e-b588-5cfe96af5363" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="31d02caf-b63e-4f69-bd25-f1ce7c6957a4" name="AddressProperty aAddressProperty" direction="In" isUnique="false">
+                  <elementDefinition Id="15ad285d-f082-4127-a32a-92be1af85bb0" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="cc484a41-b8d7-4a32-9981-60db9f858eec" direction="Return" isUnique="false">
+                  <elementDefinition Id="eb47e87d-4590-4feb-af6d-630e60a78a2d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="36f3cff1-f3f4-42d3-875f-dc2e33ae9125" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="1668a42a-8436-4eeb-80f4-79b79efb60be" name="SetUserAddressValue" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="4f926db8-57f5-43ee-9f85-5a376e07cbed" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fd14278f-72c8-410c-b60f-e02c8725c7cd" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="4dff0b2f-f068-4d51-9228-9f26d6399ecb" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="34cf8b5d-cebf-419f-9460-97adfede4498" name="int AddressIndex" direction="In" isUnique="false">
+                  <elementDefinition Id="cb99d5d7-a76c-4f20-8b9d-da7a91a55b7c" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="16a33a6e-e1a1-40a3-a0bb-769f2aa9ca94" name="AddressProperty aAddressProperty" direction="In" isUnique="false">
+                  <elementDefinition Id="3c2254f2-1803-4634-9b65-84a6a250f5bd" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d429cd5a-45f3-4df6-b773-cf884b5a73fa" name="string AddressPropertyValue" direction="In" isUnique="false">
+                  <elementDefinition Id="2a814cbf-f37d-4d8b-9946-bcf933ff710e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="024589ee-9318-40f6-8741-ea84a18c4e10" direction="Return" isUnique="false">
+                  <elementDefinition Id="9ed11f9c-690d-46b6-a80a-fae13e0296b5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" LastKnownName="bool" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c1eede75-51f7-403c-9e08-439446e9efae" name="GetUserProperty" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f4103b4a-3859-436e-9fb8-6604a3bf1474" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3c6b1c4a-a5da-4389-85c9-b6c9d980b82f" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="e7006190-974d-42d0-96b1-4a6f2eb35bcf" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2e31b3ba-e70a-479a-acb1-c9ca03037ec0" name="UserProperty aUserProperty" direction="In" isUnique="false">
+                  <elementDefinition Id="05699783-ab7f-408a-9a93-87a7b7f863bc" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="17b1facd-9749-4cdf-b527-16374f44b1fa" direction="Return" isUnique="false">
+                  <elementDefinition Id="0f5aaf63-2249-4c05-8434-763088906786" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="36f3cff1-f3f4-42d3-875f-dc2e33ae9125" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="504bc18d-6e4a-45cc-bd69-e9418978cf20" name="SetUserProperty" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="456f0ca2-9a6d-4013-9f37-9f0bacbbc06f" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b8e53a7a-9d32-44d0-9325-aa2c05fbba3e" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="d57b133d-0e30-4228-91f3-4bf847827ccc" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7170d8ea-ab70-4a51-9f6e-5371ae013063" name="UserProperty aUserProperty" direction="In" isUnique="false">
+                  <elementDefinition Id="38244734-762f-439a-9b2e-510d05daf2e2" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="317c287c-4ea9-4da5-9979-49e5482b7335" name="string aUserValue" direction="In" isUnique="false">
+                  <elementDefinition Id="2976428b-6353-4261-84f9-bc46e45c9586" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a28887ec-9673-45ba-938f-88bb7b7e5eca" direction="Return" isUnique="false">
+                  <elementDefinition Id="71f114e8-ea10-4937-983a-4ca06d80c2af" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" LastKnownName="bool" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="04cd7c39-2adc-421f-9956-4c7dbcf857ab" name="NumberOfUsers" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ed058e01-b689-428a-a89a-2991f64bf461" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fba3b17d-7e8d-4260-9944-836cb044d59a" direction="Return" isUnique="false">
+                  <elementDefinition Id="9051ad0d-ed8c-4d73-bcb0-c764db0d428f" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b5680af5-379a-4a94-bef0-580290f7769c" LastKnownName="int" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="b03ced66-d883-48d3-b8e8-4e5a5fc5d72f" name="GeUserAddressCount" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b4cc9992-c36c-4be1-acab-4ec64e7fba40" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="041afab9-b16f-4a38-b47f-418207c58c78" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="3bbed6ec-4774-4cfa-9bae-8d4cae8679c5" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="842f90d1-2562-4581-8338-1c3c7019b77e" direction="Return" isUnique="false">
+                  <elementDefinition Id="1d745d3f-8900-4a7b-bc4f-e0328d23e447" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="b5680af5-379a-4a94-bef0-580290f7769c" LastKnownName="int" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="3a8c8835-483e-48c6-9955-8b2d5ad90894" name="SetUserPreferedAddressByString" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="6eda743c-dca6-4654-8d92-a0d00f9b8819" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="db8d44e5-5dc0-4c85-b5ea-c4d0ff06bc81" name="strig aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="9c1ea300-7c19-46dd-b9f7-00f2e98ce126" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bf0b1e4a-1e3a-4166-a4a2-dc90371e2512" name="string aAddressToString" direction="In" isUnique="false">
+                  <elementDefinition Id="9cf27ac7-9773-40ba-8fc8-c4bb14eca7a8" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="776ecb8a-064e-47d1-a920-d5759b60903e" direction="Return" isUnique="false">
+                  <elementDefinition Id="744c4bf0-0a63-43d1-a302-49c420c7d6ea" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a1ec3747-db9b-4dfc-8d25-ef75a8cd5422" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="c9f920e4-5f37-46b2-a7c5-5a35c6b27caa" name="UserLoggedIn" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="55f41451-de82-40a1-af64-248cb4bb1bc6" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e8a2b3e1-cdca-454e-8365-1aae232598d3" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="a92c477f-53e8-4138-8e66-fd624a77b788" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c1a28217-38f5-47dd-80ea-d946a076d4a2" direction="Return" isUnique="false">
+                  <elementDefinition Id="e264b269-a261-4880-8eec-c8b2f389e576" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" LastKnownName="bool" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="bdf06979-5348-475a-8c5c-b7e1869d8c3e" name="LogUserIn" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="7211464c-0891-425d-bce8-59f0df0dc82b" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="54e3f4d5-976f-4a09-b95c-94f88939eb77" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="eb33e957-b642-48df-b892-08c43fc9d092" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b4314b9f-45ec-4d71-9354-199f81b72e04" name="string aPassword" direction="In" isUnique="false">
+                  <elementDefinition Id="67795229-1381-44ba-8a38-ef2090977612" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d9b722d3-2117-4c3e-b008-3b2648785c27" direction="Return" isUnique="false">
+                  <elementDefinition Id="3dc93c30-448f-4cfc-bd3f-3388f70f2309" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" LastKnownName="bool" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="901e5c6b-3a5f-4d20-b454-d6dcc3f8c994" name="LogUserOut" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="31611bc9-15f5-43be-8fa7-329ed3b63fe7" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="33b55551-8492-4e5b-b0d8-42a4e191bbee" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="1c96c73f-547e-4376-95de-b62ef12474ff" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9c4143ef-9ee2-48a5-8e93-e32998416462" direction="Return" isUnique="false">
+                  <elementDefinition Id="0fcb0deb-4fe0-4225-ad07-f4e99b47afe1" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a1ec3747-db9b-4dfc-8d25-ef75a8cd5422" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="cfcd486f-edf2-4bb0-bf8e-0685cff50ead" name="FindEmail" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="eeeb6898-1d33-4e74-a266-c5cd58ad0681" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d8264d90-372b-4aae-b50e-63e636ea5cda" name="int aUserIndex" direction="In" isUnique="false">
+                  <elementDefinition Id="e50d71f5-8cb1-466f-b544-594dddd8dd0b" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e15ea449-62dc-41a2-9941-a9719c78cac6" direction="Return" isUnique="false">
+                  <elementDefinition Id="52aea8c1-6b89-4f8d-9473-894945ce385a" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="36f3cff1-f3f4-42d3-875f-dc2e33ae9125" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="b8271912-4019-45f3-ac6c-c49212fb1ca5" name="FindEmail" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c84115b4-800a-43eb-97e1-2cc5da03380c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="35a14227-8b35-43ba-b199-86ba2218dd62" name="string aUsername" direction="In" isUnique="false">
+                  <elementDefinition Id="2d5bf0c7-a1dd-4090-bee2-ee60917c9ba7" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0751c9e4-2539-44ac-8d8a-7b3fe303120b" direction="Return" isUnique="false">
+                  <elementDefinition Id="fcd95219-ef9e-4c90-b9fb-70a56bab8e0d" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="36f3cff1-f3f4-42d3-875f-dc2e33ae9125" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="08d8f868-b478-48d6-bd05-8f9a372b23c6" name="AddAddressToUser" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="eff892e7-63c4-48d0-aa7c-b51d1fb85f60" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e73cc84d-a65f-4f57-b5b7-f6a47e183175" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="d0f22a24-c014-4164-90cf-051a3d718cc3" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="880973b2-53b9-4626-b9a9-b4ed7cbc551b" name="string aStreetNumber" direction="In" isUnique="false">
+                  <elementDefinition Id="47727ec0-f2dc-404c-9da2-1ebb9b399769" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d4cc10d9-50bd-4b54-89aa-2dacd42d47d2" name="string aStreetName" direction="In" isUnique="false">
+                  <elementDefinition Id="78521fba-716f-40f8-82fe-3b088276962a" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4ff9c230-f016-42e4-918a-8dd5ef4031ad" name="string aCity" direction="In" isUnique="false">
+                  <elementDefinition Id="34f3c099-944f-4f59-976f-6f9091fda901" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c81df40a-0b1e-4f48-bacb-e054719661ed" name="string aState" direction="In" isUnique="false">
+                  <elementDefinition Id="e9c22c8d-155d-4d8d-a64d-30fbfaa89c15" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="e2ae8a56-29c5-44b6-8312-8c67a3073fb7" name="string aZip" direction="In" isUnique="false">
+                  <elementDefinition Id="d2618e40-79c0-451f-8735-c548bccef949" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="dfa726ce-43a7-44d7-9da1-8bb8ff457ea0" direction="Return" isUnique="false">
+                  <elementDefinition Id="44c75785-5d1b-4cb0-b808-169772dc92fb" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a1ec3747-db9b-4dfc-8d25-ef75a8cd5422" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6237f7ff-941e-4142-93e0-01ff91d7aee9" name="ClearUserAddresses" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="806bb54e-b637-4831-aa4c-eb00bd30af41" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="662b9308-f097-4f26-ad5c-6b116ae58748" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="cc1a96f8-731d-46b0-b733-ec2fb621230f" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="74cddf19-dcc9-4f32-920a-b349a1fe4d20" direction="Return" isUnique="false">
+                  <elementDefinition Id="61f39e2a-a147-4fbc-8da3-111f024f42f3" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a1ec3747-db9b-4dfc-8d25-ef75a8cd5422" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="90d00c8b-c642-4809-8767-e95659d578f4" name="DeleteUser" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="60bf8f84-8bbb-43dd-b922-e57de5c23773" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="8879520f-f4c3-4b18-95b0-8e2ff2580801" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="927113d7-01a9-41c3-a0d7-46606019c15b" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="47844c2e-0208-490c-a53b-53b0ee42f10e" direction="Return" isUnique="false">
+                  <elementDefinition Id="80c34c64-1518-46da-8d81-e0678ed03bc2" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="a1ec3747-db9b-4dfc-8d25-ef75a8cd5422" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="5fcce17b-1401-4c07-a3cf-670a279b1df7" name="RecoverPassword" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="5689943c-ae57-4508-bab2-b379d74382f4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a87378b6-6948-4809-9edc-33110531e59b" name="string aEmail" direction="In" isUnique="false">
+                  <elementDefinition Id="2454c508-6d57-443f-9650-0690b8cc32ce" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="482aa01e-7040-439c-9ca7-c4a4f6bd96af" name="string aRecoveryAnswer" direction="In" isUnique="false">
+                  <elementDefinition Id="ee99f6c4-4e0f-475e-96ab-c033dc276eff" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b73d4668-a8f1-46ce-8c8f-c7da5a6bc1ce" direction="Return" isUnique="false">
+                  <elementDefinition Id="15f7127d-307a-4515-b64e-b78472f987b0" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="36f3cff1-f3f4-42d3-875f-dc2e33ae9125" LastKnownName="string" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -616,6 +1014,16 @@
     <logicalClassDesignerModelHasTypes>
       <class Id="0caa2b66-5578-4617-950d-2fd981efe31a" name="View" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="b708256f-d244-44f1-a9b7-f48d279c839d" />
+        <suppliersInternal>
+          <dependency Id="ddb98be4-e537-4fc0-b9c2-59de689c26bb">
+            <enumerationMoniker Id="cb820674-8502-4e3e-a434-934c32609acc" LastKnownName="AddressProperty" />
+            <elementDefinition Id="1aee3b79-9513-40cf-b3e9-5c6c0faaf798" />
+          </dependency>
+          <dependency Id="646b83a0-4dbf-4416-907e-7f4704a7c62f">
+            <enumerationMoniker Id="62e681c8-6d26-4725-b1fb-f670cc69aa09" LastKnownName="UserProperty" />
+            <elementDefinition Id="c34719e5-c072-4518-bf7c-42f7baa9ebac" />
+          </dependency>
+        </suppliersInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -639,7 +1047,7 @@
             <elementDefinition Id="985f8b2c-566a-44ca-9529-9dce76badbbe" />
           </association>
           <association Id="1787f10d-692d-417c-b4a7-fb5d1ee031c0" isDerived="false" sourceEndRoleName="Program" targetEndRoleName="Controller" isLeaf="false" isAbstract="false">
-            <classMoniker Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" LastKnownName="Controller" />
+            <classMoniker Id="3c19bd0d-5ec8-4a06-af49-e5cba5e37e7c" LastKnownName="ProfileController" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd Id="f174230a-8c6c-4943-b7be-d5aa6a187153" name="Program" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
@@ -658,46 +1066,6 @@
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <enumeration Id="5cd83806-5ce9-4170-9af6-536b22c2e873" name="UserState" isAbstract="false" isLeaf="false">
-        <elementDefinition Id="d4bc9246-1663-4a9c-ae26-434301c739f8" />
-        <targetEnds>
-          <association Id="106d5b91-9ad9-4624-b427-3edf94aca2be" isDerived="false" sourceEndRoleName="UserState" targetEndRoleName="User" isLeaf="false" isAbstract="false">
-            <classMoniker Id="ce51abe1-e987-4852-85ff-3bedbb129f81" LastKnownName="User" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="f278ab54-6862-4969-98ef-b3be500bf53e" name="UserState" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="c319e441-55a9-4e2c-9622-cc40cc6d69f1" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="d74ee51e-09eb-4cbd-bdf1-a69b324c226f" name="User" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="3a1137f4-ad15-4bcf-97c1-457653bf6f24" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="08326ecc-19de-40a0-a47d-e0c5d60ba08a" />
-          </association>
-        </targetEnds>
-        <ownedLiterals>
-          <enumerationLiteral Id="964758c8-3ec2-4870-a1aa-7ab12d741f0f" name="IncorrectPassword">
-            <elementDefinition Id="b0cb29a0-93b8-4f5d-90b9-10c4057a7352" />
-          </enumerationLiteral>
-          <enumerationLiteral Id="7e43ddd4-3e2d-4745-a143-3e9083e54ebc" name="IncorrectUsername">
-            <elementDefinition Id="008a8ed9-92d6-4853-8bec-4b1eb4c4f030" />
-          </enumerationLiteral>
-          <enumerationLiteral Id="4ce9cce3-d44c-41e4-8239-4432002a6d93" name="EmailNotFound">
-            <elementDefinition Id="2c716811-20d0-4efd-9af2-a83b64e027f7" />
-          </enumerationLiteral>
-          <enumerationLiteral Id="f6a64dc0-55d9-493c-a3b2-9abcabd87cd4" name="LoggedIn">
-            <elementDefinition Id="996c8647-6cd9-4801-a13d-9deef313babb" />
-          </enumerationLiteral>
-          <enumerationLiteral Id="e2a1a090-0a22-4036-b3bc-1b461e48bbbf" name="OperationSuccessfull">
-            <elementDefinition Id="2d86c5bd-62d6-4bb4-b28b-f5235cf21d43" />
-          </enumerationLiteral>
-        </ownedLiterals>
-      </enumeration>
-    </logicalClassDesignerModelHasTypes>
-    <logicalClassDesignerModelHasTypes>
       <Interface Id="8d3ef8db-7555-45ad-8d7c-e9b0defe183b" name="InputInterface" isAbstract="false" isLeaf="false">
         <elementDefinition Id="91bb1431-6f81-4084-be71-cadc8dce490d" />
         <suppliersInternal>
@@ -708,6 +1076,82 @@
         </suppliersInternal>
       </Interface>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <enumeration Id="62e681c8-6d26-4725-b1fb-f670cc69aa09" name="UserProperty" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="3b0018b4-dc9e-4e48-a727-621a15c25efb" />
+        <ownedLiterals>
+          <enumerationLiteral Id="6fe67e0e-af71-42f2-a516-14ccd6f9e64d" name="Name">
+            <elementDefinition Id="73b9b4f4-de00-4cab-abc9-265f2b520374" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="777b6cb3-acb2-4f4b-a7ed-4520ccf6060e" name="PhoneNumber">
+            <elementDefinition Id="4c35cf70-941b-4ae2-829d-82f50a64db7f" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="40c97479-cc9e-40d2-811e-6f429aea5128" name="Email">
+            <elementDefinition Id="dc3acf12-30eb-45eb-9bdd-f0322cc2ff63" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="b9a7f576-2413-4ca0-91ff-fa502e13bc32" name="Username">
+            <elementDefinition Id="24caf1ca-a71a-403a-81ca-398894ba7abc" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="f8c3d3f5-f3b5-4802-924a-67ebf28b3273" name="Password">
+            <elementDefinition Id="ca432fe7-2a98-44a6-9767-12debee060ba" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="f385cba0-442c-440d-9bdf-2f68e165bc18" name="RecoveryQuestion">
+            <elementDefinition Id="3668963e-8889-4276-8ffe-6600b83d85ba" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="57b6091d-7bd6-4bfa-822a-14390b414f1a" name="RecoveryAnswer">
+            <elementDefinition Id="a5aedec9-b452-47db-adf4-e1509b3d519f" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="37f9a40f-422f-432b-9cd2-73ed742f17ed" name="ToString">
+            <elementDefinition Id="abe90fe9-21b1-4826-ac1d-ea20d4038443" />
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <enumeration Id="cb820674-8502-4e3e-a434-934c32609acc" name="AddressProperty" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="080d0df9-bafb-4273-bd66-a604e94104bc" />
+        <ownedLiterals>
+          <enumerationLiteral Id="88b12e3d-da32-42b9-9517-5c7d6aca392a" name="State">
+            <elementDefinition Id="d0b14975-3556-4a27-9dfc-5eb8926b44bf" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="0f717e3e-15bb-452a-88af-6e1ae8c1182f" name="City">
+            <elementDefinition Id="47212a01-0621-4095-a964-ab234ea34a51" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="d3ae14e6-193a-43ea-ae35-83540e75a3fc" name="StreetNumber">
+            <elementDefinition Id="673a9338-ac85-4e94-99f3-518f75823c0b" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="dd87f1c6-8c90-409d-8e7a-c153aa7fb04c" name="StreetName">
+            <elementDefinition Id="cb3f338a-fd65-498b-8483-f629b067f23c" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="383d3884-4ffd-4de5-b14f-7b49cbcda585" name="ToString">
+            <elementDefinition Id="9cde98bf-818d-479f-8942-0849dab4f482" />
+          </enumerationLiteral>
+          <enumerationLiteral Id="875661cc-b4f0-4aa8-a4f1-6f7103a99dcf" name="Zip">
+            <elementDefinition Id="9e635a66-57d9-4243-acea-9c950c0e67a7" />
+          </enumerationLiteral>
+        </ownedLiterals>
+      </enumeration>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="a1ec3747-db9b-4dfc-8d25-ef75a8cd5422" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="162fde91-afe2-4f4c-ada6-cc5a57678c96" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="b5680af5-379a-4a94-bef0-580290f7769c" name="int" isAbstract="false" isLeaf="false" cachedFullName="int">
+        <elementDefinition Id="604c99bb-1c0a-4d38-a476-25530726fb57" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="36f3cff1-f3f4-42d3-875f-dc2e33ae9125" name="string" isAbstract="false" isLeaf="false" cachedFullName="string">
+        <elementDefinition Id="8ba5cdb8-9313-4376-95be-fd0b57ead2ac" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="91d70734-0330-4a0b-9e17-86ea86ca21e9" name="bool" isAbstract="false" isLeaf="false" cachedFullName="bool">
+        <elementDefinition Id="75eb867b-a35b-4f59-b847-caa713c9cf35" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="28485b0f-3c53-4ff2-8e33-0f8822d94f66" name="ProfileManagerDiagram">
     <elementDefinition Id="491ec288-0fdc-4e4f-83b5-c767339c6602" />
