@@ -708,6 +708,87 @@
         </suppliersInternal>
       </Interface>
     </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="a578cd59-f213-4302-a7c8-2ddf24b2d457" name="PlaceHolderObserver" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="47a063bc-643e-4762-9d03-501f9ec9d2be" />
+        <ownedAttributes>
+          <property Id="918e8022-b264-4eb8-99a9-29a5b6103d9d" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="15fcf1f0-eb1f-4fc1-b6f0-6c787f69a278" />
+          </property>
+        </ownedAttributes>
+        <ownedOperations>
+          <operation Id="b6a9e6b8-83a7-4d9b-9ead-2555db578dd2" name="Update" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="665ac71e-594f-4e3f-8103-a911ee9283aa" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f2397b21-ee3e-471c-95b0-0beea1cbd5c8" name="bool" direction="In" isUnique="false">
+                  <elementDefinition Id="d9cd2daf-7e70-45b7-99e5-206674ea80ed" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="808ca0f9-a9c6-4d3a-b41b-87da9de94402" LastKnownName="purchasing" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="808ca0f9-a9c6-4d3a-b41b-87da9de94402" name="purchasing" isAbstract="false" isLeaf="false" cachedFullName="purchasing">
+        <elementDefinition Id="a758914b-424d-43fc-9790-c1f0128cfdd6" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="0bccf170-32c1-4fbb-9e30-c2ad0aba1fb2" name="PlaceHolderSubject" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a043d47f-dac1-4a58-80de-23d435cd2dac" />
+        <ownedOperations>
+          <operation Id="6fbf3a83-4944-4ff6-be82-3ff58ee5cdf0" name="RegisterObserver" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="33e5dc10-f055-4523-b0ae-143ccadb4a42" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9aede79a-9caf-4318-84b2-34d4819a64bd" name="PlaceHolderObserver" direction="In" isUnique="false">
+                  <elementDefinition Id="3465aa76-5d3b-47b3-9b17-cd06ddb6104b" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="2f15b77c-3430-4b9d-9424-f6d46c4850d7" LastKnownName="observer" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="6ff57a4d-2a56-4290-8b51-2ae87714114b" name="UnregisterObserver" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2528e6fc-72c0-4892-839a-7bb44d7b8cba" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="0b69e01a-21d3-4eb3-94df-e21d6b348499" name="PlaceHolder" direction="In" isUnique="false">
+                  <elementDefinition Id="9f61d24b-71b1-4f20-972c-eab3c37d94a1" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="2f15b77c-3430-4b9d-9424-f6d46c4850d7" LastKnownName="observer" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="660837ef-1243-49fd-8a1a-93fcf8725478" name="NotifyObservers" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="b9b11a78-ddbf-4965-a046-bee48d683fda" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="322880c4-8832-416d-8804-e2dc6b0347a7" name="bool" direction="In" isUnique="false">
+                  <elementDefinition Id="4016e207-85a9-4a33-b539-52cf1f4b2588" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="808ca0f9-a9c6-4d3a-b41b-87da9de94402" LastKnownName="purchasing" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="2f15b77c-3430-4b9d-9424-f6d46c4850d7" name="observer" isAbstract="false" isLeaf="false" cachedFullName="observer">
+        <elementDefinition Id="b5a20954-8efd-41d0-9d4e-4062c4331e9e" />
+      </referencedType>
+    </packageHasNamedElement>
   </packagedElements>
   <package Id="28485b0f-3c53-4ff2-8e33-0f8822d94f66" name="ProfileManagerDiagram">
     <elementDefinition Id="491ec288-0fdc-4e4f-83b5-c767339c6602" />

@@ -28,9 +28,12 @@ namespace ProfileManagerLib
         ToString
     };
 
+    
 
     public interface IProfileController
     {
+         
+         void notifyObserver();
          string GetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty);
          bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue);
          string GetUserProperty(string aEmail, UserProperty aUserProperty);
@@ -56,8 +59,7 @@ namespace ProfileManagerLib
     public class ProfileController : IProfileController
     {
         private UserDB mUserDB;
-
-
+        private bool purchasing;
         //---------------------------------------- Constructors ---------------------------------------
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace ProfileManagerLib
         public ProfileController(int aFakeUserCount)
         {
             mUserDB = new UserDB(aFakeUserCount);
+            purchasing = false;
         }
 
         /// <summary>
@@ -82,6 +85,7 @@ namespace ProfileManagerLib
         public ProfileController(string aDBlocation)
         {
             mUserDB = new UserDB(aDBlocation);
+            purchasing = false;
         }
 
         //---------------------------------------- Get and set User and Address Values -----------------------------------
@@ -119,7 +123,8 @@ namespace ProfileManagerLib
 
         /// <summary>
         /// Set an Address value on an address that a User has, identified by Address index(1-5)
-        /// returns false if a nonexistent index was specified or the user was logged out.
+        /// returns false if a nonexistent index was specified or the user was logged out. Need to have observer to make sure we don't 
+        /// edit addresses while we are mid purchase
         /// </summary>
         /// <param name="aEmail"></param>
         /// <param name="aAddressIndex"></param>
@@ -128,7 +133,7 @@ namespace ProfileManagerLib
         public bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue)
         {
             User lUser = mUserDB.FindUser(aEmail);
-            if(lUser.getAddresses().Count < aAddressIndex || !lUser.LoggedIn)
+            if(lUser.getAddresses().Count < aAddressIndex || !lUser.LoggedIn || purchasing)
             {
                 return false;
             }
@@ -183,14 +188,14 @@ namespace ProfileManagerLib
         }
 
         /// <summary>
-        /// Set a user value. User must be logged in to change values.
+        /// Set a user value. User must be logged in to change values and not purchasing.
         /// The Password cannot be changed from here, see ChangeUserPassword().
         /// </summary>
         /// <returns></returns>
         public bool SetUserProperty(string aEmail, UserProperty aUserProperty, string aUserValue)
         {
             //We shouldn't be able to change anything if the user isn't logged in.
-            if (!UserLoggedIn(aEmail))
+            if (!UserLoggedIn(aEmail) || purchasing)
             {
                 return false;
             }
@@ -242,15 +247,24 @@ namespace ProfileManagerLib
         /// <param name="aAddressToString"></param>
         public void SetUserPreferredAddressByString(string aEmail, string aAddressToString)
         {
+            if (purchasing)
+            {
+                return;
+            }
             mUserDB.FindUser(aEmail).SetPreferredShippingAddressByString(aAddressToString);
         }
 
         /// <summary>
-        /// Attempt to change a password, with a current password and new desired password.
+        /// Attempt to change a password, with a current password and new desired password 
+        /// this is not allowed if purchasing.
         /// </summary>
         public bool ChangeUserPassword(string aEmail, string aCurPassword, string aNewPassword)
         {
-            return mUserDB.FindUser(aEmail).ChangePassword(aCurPassword, aNewPassword);
+            if(!purchasing)
+            {
+                return mUserDB.FindUser(aEmail).ChangePassword(aCurPassword, aNewPassword);
+            }
+            return false;
         }
 
         /// <summary>
@@ -269,6 +283,10 @@ namespace ProfileManagerLib
         /// </summary>
         public bool LogUserIn(string aEmail, string aPassword) 
         {
+            if (purchasing)
+            {
+                return false;
+            }
             return mUserDB.FindUser(aEmail).LogIn(aPassword);
         }
 
