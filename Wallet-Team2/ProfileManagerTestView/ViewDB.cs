@@ -231,7 +231,10 @@ namespace ProfileManagerTestView
                 {
                     string lCurUsername = mProfileController.GetUserProperty(mSelectedUserEmail,UserProperty.Username);
                     string lPassAttempt = (Prompt.ShowDialog("Enter password for " + lCurUsername, "Enter password"));
-                    mProfileController.LogUserIn(mSelectedUserEmail, lPassAttempt);
+                    if (!mProfileController.LogUserIn(mSelectedUserEmail, lPassAttempt))
+                    {
+                        MessageBox.Show("Incorrect password!");
+                    }
                 }
                 LoadDisplay();
             }
