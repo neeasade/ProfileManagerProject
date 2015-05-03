@@ -28,14 +28,11 @@ namespace ProfileManagerLib
         ToString
     };
 
-    
 
     public interface IProfileController
     {
-         
-         void notifyObserver();
          string GetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty);
-         string GetAllUserAddresses(string aEmail);
+         List<string> GetAllUserAddresses(string aEmail);
          bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue);
          string GetUserProperty(string aEmail, UserProperty aUserProperty);
          bool SetUserProperty(string aEmail, UserProperty aUserProperty, string aUserValue);
@@ -55,12 +52,12 @@ namespace ProfileManagerLib
          void DeleteUser(string aEmail);
          string RecoverPassword(string aEmail, string aRecoveryAnswer);
          bool SaveDatabase(string aDBlocation);
+         bool GetUserTransactionStatus(string aEmail);
     }
 
-    public class ProfileController : IProfileController
+    public class ProfileController : IProfileController, Observer
     {
         private UserDB mUserDB;
-        private bool purchasing;
         //---------------------------------------- Constructors ---------------------------------------
 
         /// <summary>
@@ -77,7 +74,6 @@ namespace ProfileManagerLib
         public ProfileController(int aFakeUserCount)
         {
             mUserDB = new UserDB(aFakeUserCount);
-            purchasing = false;
         }
 
         /// <summary>
@@ -86,7 +82,6 @@ namespace ProfileManagerLib
         public ProfileController(string aDBlocation)
         {
             mUserDB = new UserDB(aDBlocation);
-            purchasing = false;
         }
 
         //---------------------------------------- Get and set User and Address Values -----------------------------------
@@ -157,7 +152,7 @@ namespace ProfileManagerLib
         public bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue)
         {
             User lUser = mUserDB.FindUser(aEmail);
-            if(lUser.getAddresses().Count < aAddressIndex || !lUser.LoggedIn || purchasing)
+            if(lUser.getAddresses().Count < aAddressIndex || !lUser.LoggedIn  || lUser.Purchasing)
             {
                 return false;
             }
@@ -219,12 +214,17 @@ namespace ProfileManagerLib
         public bool SetUserProperty(string aEmail, UserProperty aUserProperty, string aUserValue)
         {
             //We shouldn't be able to change anything if the user isn't logged in.
-            if (!UserLoggedIn(aEmail) || purchasing)
+            if (!UserLoggedIn(aEmail))
             {
                 return false;
             }
 
             User lUser = mUserDB.FindUser(aEmail);
+    
+            if (lUser.Purchasing)
+            {
+                return false;
+            }
 
             switch (aUserProperty)
             {
@@ -271,11 +271,10 @@ namespace ProfileManagerLib
         /// <param name="aAddressToString"></param>
         public void SetUserPreferredAddressByString(string aEmail, string aAddressToString)
         {
-            if (purchasing)
+            if(!mUserDB.FindUser(aEmail).Purchasing)
             {
-                return;
+                mUserDB.FindUser(aEmail).SetPreferredShippingAddressByString(aAddressToString);
             }
-            mUserDB.FindUser(aEmail).SetPreferredShippingAddressByString(aAddressToString);
         }
 
         /// <summary>
@@ -284,11 +283,7 @@ namespace ProfileManagerLib
         /// </summary>
         public bool ChangeUserPassword(string aEmail, string aCurPassword, string aNewPassword)
         {
-            if(!purchasing)
-            {
-                return mUserDB.FindUser(aEmail).ChangePassword(aCurPassword, aNewPassword);
-            }
-            return false;
+            return mUserDB.FindUser(aEmail).ChangePassword(aCurPassword, aNewPassword);
         }
 
         /// <summary>
@@ -307,10 +302,6 @@ namespace ProfileManagerLib
         /// </summary>
         public bool LogUserIn(string aEmail, string aPassword) 
         {
-            if (purchasing)
-            {
-                return false;
-            }
             return mUserDB.FindUser(aEmail).LogIn(aPassword);
         }
 
@@ -408,6 +399,16 @@ namespace ProfileManagerLib
         public bool SaveDatabase(string aDBlocation)
         {
             return mUserDB.Save(aDBlocation);
+        }
+
+        public void SetUserTransactionStatus(string aEmail, bool aTransactionStatus)
+        {
+            mUserDB.FindUser(aEmail).Purchasing = aTransactionStatus;
+        }
+
+        public bool GetUserTransactionStatus(string aEmail)
+        {
+            return mUserDB.FindUser(aEmail).Purchasing;
         }
     }
 }

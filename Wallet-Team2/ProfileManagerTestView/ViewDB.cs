@@ -290,6 +290,11 @@ namespace ProfileManagerTestView
             mProfileController.DeleteUser(mSelectedUserEmail);
             LoadDisplay();
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            mProfileController.SetUserTransactionStatus(mSelectedUserEmail,!mProfileController.GetUserTransactionStatus(mSelectedUserEmail));
+        }
     }
 
     public static class Prompt

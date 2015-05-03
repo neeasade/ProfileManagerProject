@@ -17,6 +17,13 @@ namespace ProfileManagerLib
         private string mRecoveryAnswer;
         private string mPhoneNumber;
         private bool mLoggedIn;
+        private bool mPurchasing;
+
+        public bool Purchasing
+        {
+            get { return mPurchasing; }
+            set { mPurchasing = value; ; }
+        }
 
         /// <summary>
         /// User Logged in status - set with Login() and Logout() functions.
@@ -185,7 +192,7 @@ namespace ProfileManagerLib
         /// </summary>
         public bool SetPreferredShippingAddressByString(string aAddressString)
         {
-            if (mLoggedIn)
+            if (mLoggedIn && !mPurchasing)
             {
                 if (mAddresses[0].ToString() == aAddressString)
                 {
