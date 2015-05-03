@@ -35,6 +35,7 @@ namespace ProfileManagerLib
          
          void notifyObserver();
          string GetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty);
+         string GetAllUserAddresses(string aEmail);
          bool SetUserAddressValue(string aEmail, int aAddressIndex, AddressProperty aAddressProperty, string aAddressPropertyValue);
          string GetUserProperty(string aEmail, UserProperty aUserProperty);
          bool SetUserProperty(string aEmail, UserProperty aUserProperty, string aUserValue);
@@ -120,7 +121,30 @@ namespace ProfileManagerLib
             //shouldn't get here:
             return null;
         }
-
+        /// <summary>
+        /// Gets all addresses of a usser 
+        /// </summary>
+        /// <param name="aEmail"></param>
+        /// <returns></returns>
+        public List<string> GetAllUserAddresses(string aEmail)
+        {
+            User lUser = mUserDB.FindUser(aEmail);
+            if (lUser.getAddresses() == null)
+            {
+                return null;
+            }
+            List<Address> mAddresses = lUser.getAddresses();
+            if (mAddresses == null)
+            {
+                return null;
+            }
+            List<string> mStringAd = new List<string>();
+            foreach (Address a in mAddresses)
+            {
+                mStringAd.Add(a.ToString());
+            }
+            return mStringAd;
+        }
         /// <summary>
         /// Set an Address value on an address that a User has, identified by Address index(1-5)
         /// returns false if a nonexistent index was specified or the user was logged out. Need to have observer to make sure we don't 
